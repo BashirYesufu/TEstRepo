@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/color_constants.dart';
 
-
 class ApexButton extends StatelessWidget {
   final Function() onPressed;
   final String text;
