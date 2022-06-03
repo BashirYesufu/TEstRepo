@@ -31,7 +31,7 @@ class ApexButton extends StatelessWidget {
         child: MaterialButton(
           onPressed: onPressed,
           minWidth: double.infinity,
-          height: 50.0,
+          height: 56.0,
           child: Text(
             text,
             style: TextStyle(

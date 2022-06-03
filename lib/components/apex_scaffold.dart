@@ -44,14 +44,17 @@ class ApexScaffold extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Column(
                   children: children,
                 ),
               ),
             ),
           ),
-          bottomNavigationBar: SafeArea(child: bottomNavBar ?? SizedBox()),
+          bottomNavigationBar: SafeArea(child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.0),
+            child: bottomNavBar ?? SizedBox(),
+          )),
         ),
       ),
     );
