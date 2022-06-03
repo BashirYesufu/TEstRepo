@@ -18,7 +18,7 @@ class Apex extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: RouteHandler.initialRoute,
         routes: RouteHandler.routes,
-        //onGenerateRoute: RouteHandler.generateRoute,
+        onGenerateRoute: RouteHandler.generateRoute,
       ),
     );
   }

@@ -2,10 +2,14 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../components/apex_button.dart';
 import '../../components/apex_textfield.dart';
 import '../../components/google_apple.dart';
 import '../../constants/text_styles.dart';
+import '../../models/user.dart';
+import '../../utilities/provider/providers/loading_provider.dart';
+import '../../utilities/services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -24,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loader = Provider.of<LoadingStateProvider>(context);
     return ApexScaffold(
       hasBackButton: false,
         bottomNavBar: RichText(
@@ -90,9 +95,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         SizedBox(height: 30,),
         ApexButton(
-          onPressed: () {
+          onPressed: () async {
             //TODO: Create User
-            //loader.load();
+            print(hasText);
+            print(_nameTC.text);
+            print(_passwordTC.text);
+            print(_emailTC.text);
+
+              loader.load();
+              try {
+                User user = await AuthService().createUser(
+                    fullName: _nameTC.text,
+                    email: _emailTC.text,
+                    password: _passwordTC.text);
+                loader.stop();
+                print(user.email);
+                //TODO: show popup to navigate to dashboard with User
+                // Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
+              } catch (error) {
+                print(error);
+                loader.stop();
+                //TODO: Handle error
+              }
           },
           text: 'Sign In',
           enabled: hasText,
