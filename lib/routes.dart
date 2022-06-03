@@ -1,5 +1,6 @@
-
+import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
+import 'package:apex/screens/authentication/sign_up_screen.dart';
 import 'package:apex/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,5 +10,7 @@ class RouteHandler {
   static Map<String, Widget Function(BuildContext)> routes = {
     OnBoardingScreen.screenID: (context) => OnBoardingScreen(),
     SignInScreen.screenID: (context) => SignInScreen(),
+    SignUpScreen.screenID: (context) => SignUpScreen(),
+    ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
   };
 }

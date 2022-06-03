@@ -2,6 +2,8 @@ import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/constants/color_constants.dart';
+import 'package:apex/screens/authentication/sign_up_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +29,26 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final loader = Provider.of<LoadingStateProvider>(context);
-    return ApexScaffold(hasBackButton: true, children: [
+    return ApexScaffold(
+        hasBackButton: true,
+        bottomNavBar: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            text: 'Don\'t have an account? ',
+            style: ApexTextStyles.kDarkGrey16,
+            children: [
+              TextSpan(
+                  text: 'Sign Up',
+                  style: ApexTextStyles.kOrange16,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.pushNamed(
+                          context, SignUpScreen.screenID);
+                    }),
+            ],
+          ),
+        ),
+        children: [
       ScreenTitle(
         title: 'Hi There! 👋 ',
         subTitle: 'Welcome back, Sign in to your account',
@@ -54,7 +75,8 @@ class _SignInScreenState extends State<SignInScreen> {
             InkWell(
               onTap: () {
                 //TODO: Navigate to forgot password screen
-                print(hasText);
+                //   Navigator.pushNamed(
+                //       context, SignUpScreen.screenID);
               },
               child: Text(
                 'Forgot Password?',
@@ -74,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
         enabled: hasText,
       ),
       Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.0),
+        padding: EdgeInsets.symmetric(vertical: 30.0),
         child: Row(
           children: [
             Flexible(
