@@ -5,4 +5,5 @@ class ApexColors {
   static const orange = Color(0xFFFFAB63);
   static const white = Color(0xFFFFFFFF);
   static const grey = Color(0xFFE5E7EB);
+  static const darkGrey = Color(0xFF6B7280);
 }
