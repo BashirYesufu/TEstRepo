@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../constants/color_constants.dart';
 import '../../../constants/text_styles.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -48,20 +49,16 @@ class OnBoardingPage extends StatelessWidget {
                         ),
                       ],
                       gradient: LinearGradient(
-                          begin: Alignment.topCenter,
+                        begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Color(0xFFFFFFFF).withOpacity(0),
-                            Color(0xFFFFFFFF).withOpacity(0),
-                            Color(0xFFFFFFFF).withOpacity(0.6),
-                            Color(0xFFFFFFFF).withOpacity(1),
-                          ],
-                          stops: const [
-                            0.0,
-                            0.3,
-                            0.7,
-                            1.0
-                          ])),
+                            ApexColors.white.withOpacity(0),
+                            ApexColors.white.withOpacity(0),
+                            ApexColors.white.withOpacity(0.3),
+                            ApexColors.white.withOpacity(0.5),
+                            ApexColors.white,
+                          ]
+                      ),),
                 )
               ],
             ),
@@ -69,11 +66,11 @@ class OnBoardingPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(title,
-                  style: ApexTextStyles.kBlackBold24,
+                  style: ApexTextStyles.kBlackBold28,
                   textAlign: TextAlign.center,),
                 SizedBox(height: 30,),
                 Text(subtitle,
-                  style: ApexTextStyles.kGrey14,
+                  style: ApexTextStyles.kDarkGrey14,
                   textAlign: TextAlign.center,)
               ],
             )
