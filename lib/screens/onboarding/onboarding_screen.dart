@@ -16,9 +16,12 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ApexScaffold(
       hasBackButton: false,
-      bottomNavBar: ApexButton(onPressed: (){
-        Navigator.pushReplacementNamed(context, SignInScreen.screenID);
-      }, text: 'Get Started',),
+      bottomNavBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: ApexButton(onPressed: (){
+          Navigator.pushNamed(context, SignInScreen.screenID);
+        }, text: 'Get Started',),
+      ),
       trailing: [
         Transform.translate(
           offset: Offset(-20.0, 0.0),
@@ -30,28 +33,31 @@ class OnBoardingScreen extends StatelessWidget {
         )
       ],
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              height: 500,
-              child: PageView(
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: 500,
+                child: PageView(
+                  controller: _controller,
+                  children: Pages.onboardingPages,
+                ),
+              ),
+              SmoothPageIndicator(
                 controller: _controller,
-                children: Pages.onboardingPages,
+                count: Pages.onboardingPages.length,
+                effect: ExpandingDotsEffect(
+                  activeDotColor: ApexColors.black,
+                  dotColor: ApexColors.grey,
+                  dotHeight: 8,
+                  dotWidth: 8,
+                  spacing: 10,
+                ),
               ),
-            ),
-            SmoothPageIndicator(
-              controller: _controller,
-              count: Pages.onboardingPages.length,
-              effect: ExpandingDotsEffect(
-                activeDotColor: ApexColors.black,
-                dotColor: ApexColors.grey,
-                dotHeight: 8,
-                dotWidth: 8,
-                spacing: 10,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
