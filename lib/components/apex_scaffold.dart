@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../utilities/provider/providers/loading_provider.dart';
+import 'apex_back_button.dart';
 
 class ApexScaffold extends StatelessWidget {
   final List<Widget> children;
@@ -10,6 +11,7 @@ class ApexScaffold extends StatelessWidget {
   final Color backgroundColor;
   final Widget? bottomNavBar;
   final bool hasBackButton;
+  final List<Widget>? trailing;
 
   const ApexScaffold({
     required this.children,
@@ -17,6 +19,7 @@ class ApexScaffold extends StatelessWidget {
     this.backgroundColor = ApexColors.white,
     this.bottomNavBar,
     this.hasBackButton = true,
+    this.trailing,
     Key? key,
   }) : super(key: key);
 
@@ -34,13 +37,9 @@ class ApexScaffold extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
             leading: hasBackButton
-                ? InkWell(
-                    onTap: () {
-                      //Navigator.pop(context);
-                    },
-                    child: Icon(Icons.arrow_back_ios, color: ApexColors.black,),
-                  )
+                ? ApexBackButton()
                 : SizedBox(),
+            actions: trailing,
           ),
           body: SafeArea(
             child: SingleChildScrollView(
