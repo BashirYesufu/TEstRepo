@@ -69,11 +69,11 @@ class OnBoardingPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(title,
-                  style: ApexTextStyles.kBlackBold24,
+                  style: ApexTextStyles.kBlackBold28,
                   textAlign: TextAlign.center,),
                 SizedBox(height: 30,),
                 Text(subtitle,
-                  style: ApexTextStyles.kGrey14,
+                  style: ApexTextStyles.kDarkGrey14,
                   textAlign: TextAlign.center,)
               ],
             )

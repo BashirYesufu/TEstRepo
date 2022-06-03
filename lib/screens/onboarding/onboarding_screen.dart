@@ -27,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
           offset: Offset(-20.0, 0.0),
           child: InkWell(
             onTap: (){
-              _controller.jumpToPage(Pages.onboardingPages.length);
+              Navigator.pushNamed(context, SignInScreen.screenID);
             },
             child: Text('Skip', style: ApexTextStyles.kOrange16,),),
         )
@@ -38,6 +38,7 @@ class OnBoardingScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(height: 50,),
               SizedBox(
                 height: 500,
                 child: PageView(

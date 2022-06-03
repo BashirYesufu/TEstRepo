@@ -1,5 +1,6 @@
 import 'package:apex/constants/color_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import '../utilities/provider/providers/loading_provider.dart';
@@ -30,6 +31,10 @@ class ApexScaffold extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ModalProgressHUD(
         inAsyncCall: loadingProvider.loading,
+        progressIndicator: LoadingAnimationWidget.fourRotatingDots(
+          color: ApexColors.orange,
+          size: 100.0,
+        ),
         child: Scaffold(
           backgroundColor: appBarColor,
           appBar: AppBar(
