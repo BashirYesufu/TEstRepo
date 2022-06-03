@@ -2,6 +2,7 @@ import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/constants/color_constants.dart';
+import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final loader = Provider.of<LoadingStateProvider>(context);
     return ApexScaffold(
-        hasBackButton: true,
+        hasBackButton: false,
         bottomNavBar: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
@@ -75,8 +76,8 @@ class _SignInScreenState extends State<SignInScreen> {
             InkWell(
               onTap: () {
                 //TODO: Navigate to forgot password screen
-                //   Navigator.pushNamed(
-                //       context, SignUpScreen.screenID);
+                  Navigator.pushNamed(
+                      context, ForgotPasswordScreen.screenID);
               },
               child: Text(
                 'Forgot Password?',

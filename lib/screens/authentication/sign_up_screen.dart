@@ -7,6 +7,9 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ApexScaffold(children: []);
+    return ApexScaffold(
+      hasBackButton: false,
+      children: []
+    );
   }
 }

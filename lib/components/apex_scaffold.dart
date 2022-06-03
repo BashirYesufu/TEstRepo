@@ -35,31 +35,34 @@ class ApexScaffold extends StatelessWidget {
           color: ApexColors.orange,
           size: 100.0,
         ),
-        child: Scaffold(
-          backgroundColor: appBarColor,
-          appBar: AppBar(
-            backgroundColor: backgroundColor,
-            elevation: 0,
-            centerTitle: true,
-            leading: hasBackButton
-                ? ApexBackButton()
-                : SizedBox(),
-            actions: trailing,
-          ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: children,
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            backgroundColor: appBarColor,
+            appBar: AppBar(
+              backgroundColor: backgroundColor,
+              elevation: 0,
+              centerTitle: true,
+              leading: hasBackButton
+                  ? ApexBackButton()
+                  : SizedBox(),
+              actions: trailing,
+            ),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: children,
+                  ),
                 ),
               ),
             ),
+            bottomNavigationBar: SafeArea(child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: bottomNavBar ?? SizedBox(),
+            )),
           ),
-          bottomNavigationBar: SafeArea(child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: bottomNavBar ?? SizedBox(),
-          )),
         ),
       ),
     );
