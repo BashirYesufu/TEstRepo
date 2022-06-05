@@ -4,14 +4,14 @@ import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
 import 'package:apex/screens/authentication/country_residence_screen.dart';
-import 'package:apex/screens/authentication/new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import '../../models/user.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
-  EmailVerificationScreen({required this.email, Key? key}) : super(key: key);
+  EmailVerificationScreen({this.user, Key? key}) : super(key: key);
   static const screenID = "EmailVerification";
-  final String email;
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class EmailVerificationScreen extends StatelessWidget {
       ScreenTitle(
         title: 'Verify it\'s you',
         subTitle:
-            'We send a code to ( *****@mail.com ). Enter it here to verify your identity',
+            'We send a code to ( ${user?.email} ). Enter it here to verify your identity',
       ),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),

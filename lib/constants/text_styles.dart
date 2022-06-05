@@ -49,4 +49,10 @@ class ApexTextStyles {
       fontSize: 16.0,
       fontWeight: FontWeight.w700
   );
+  static const kRed16 = TextStyle(
+      fontFamily: ApexFonts.sfProDisplay,
+      color: ApexColors.red,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w700
+  );
 }

@@ -51,6 +51,7 @@ flutter:
     - assets/images/google.png
     - assets/images/password_lock.png
     - assets/images/pin_created.png
+    - assets/images/diamond.png
 
   fonts:
     - family: SFProDisplay

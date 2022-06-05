@@ -8,7 +8,7 @@ import 'package:apex/screens/authentication/pin_created_screen.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
 import 'package:apex/screens/dashboard.dart';
-import 'package:apex/screens/dashboard_arguments.dart';
+import 'package:apex/screens/user_arguments.dart';
 import 'package:apex/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,6 @@ class RouteHandler {
     SignInScreen.screenID: (context) => SignInScreen(),
     SignUpScreen.screenID: (context) => SignUpScreen(),
     ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
-    EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(email: 'email.com'),
     NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
     PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
     CountryResidence.screenID: (context) => CountryResidence(),
@@ -30,9 +29,14 @@ class RouteHandler {
   static Route<dynamic>? generateRoute(RouteSettings route) {
     switch (route.name) {
       case DashBoard.screenID:
-        final args = route.arguments as DashBoardArguments;
+        final args = route.arguments as UserArguments;
         return MaterialPageRoute(builder: (context) {
           return DashBoard(user: args.user);
+        });
+      case EmailVerificationScreen.screenID:
+        final args = route.arguments as UserArguments;
+        return MaterialPageRoute(builder: (context) {
+          return EmailVerificationScreen(user: args.user);
         });
       default:
         return null;
