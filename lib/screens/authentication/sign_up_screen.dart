@@ -118,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     alert: 'Your OTP is $token',
                     onPressed: () => navigator.pushNamed(
                         EmailVerificationScreen.screenID,
-                        arguments: UserArguments(user: user)),
+                        arguments: UserArguments(user: user, password: _passwordTC.text)),
                   );
                 } catch (_) {
                   loader.stop();

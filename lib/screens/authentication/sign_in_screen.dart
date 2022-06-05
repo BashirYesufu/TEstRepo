@@ -3,6 +3,7 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
+import 'package:apex/screens/dashboard.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ import '../../components/google_apple.dart';
 import '../../components/screen_title.dart';
 import '../../constants/text_styles.dart';
 import '../../models/user.dart';
+import '../../utilities/alert_handler.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
+import '../user_arguments.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -31,87 +34,92 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final loader = Provider.of<LoadingStateProvider>(context);
     return ApexScaffold(
-        hasBackButton: false,
-        bottomNavBar: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            text: 'Don\'t have an account? ',
-            style: ApexTextStyles.kDarkGrey16,
-            children: [
-              TextSpan(
-                  text: 'Sign Up',
-                  style: ApexTextStyles.kOrange16,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.pushReplacementNamed(
-                          context, SignUpScreen.screenID);
-                    }),
-            ],
-          ),
-        ),
-        children: [
-      ScreenTitle(
-        title: 'Hi There! 👋 ',
-        subTitle: 'Welcome back, Sign in to your account',
-      ),
-      ApexTextField(
-        hintText: 'Email',
-        controller: _emailTC,
-        onChanged: (value) {
-          checkButton();
-        },
-      ),
-      ApexTextField(
-        hintText: 'Password',
-        controller: _passwordTC,
-        hasObscuringSuffix: true,
-        onChanged: (value) {
-          checkButton();
-        },
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 15.0),
-        child: Row(
+      hasBackButton: false,
+      bottomNavBar: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: 'Don\'t have an account? ',
+          style: ApexTextStyles.kDarkGrey16,
           children: [
-            InkWell(
-              onTap: () {
-                  Navigator.pushNamed(
-                      context, ForgotPasswordScreen.screenID);
-              },
-              child: Text(
-                'Forgot Password?',
+            TextSpan(
+                text: 'Sign Up',
                 style: ApexTextStyles.kOrange16,
-              ),
-            ),
-            Spacer()
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushReplacementNamed(
+                        context, SignUpScreen.screenID);
+                  }),
           ],
         ),
       ),
-      ApexButton(
-        onPressed: () async {
-          //TODO: Login User
-          if (hasText) {
-            loader.load();
-            try {
-              User user = await AuthService().loginUser(email: _emailTC.text, password: _passwordTC.text);
-              loader.stop();
-              //TODO: show popup to navigate to dashboard with User
-              print(user.fullName);
-             // Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
-            } catch (error) {
-              //TODO: Handle Error with error codes
-              loader.stop();
-              print(error);
+      children: [
+        ScreenTitle(
+          title: 'Hi There! 👋 ',
+          subTitle: 'Welcome back, Sign in to your account',
+        ),
+        ApexTextField(
+          hintText: 'Email',
+          controller: _emailTC,
+          onChanged: (value) {
+            checkButton();
+          },
+        ),
+        ApexTextField(
+          hintText: 'Password',
+          controller: _passwordTC,
+          hasObscuringSuffix: true,
+          onChanged: (value) {
+            checkButton();
+          },
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, ForgotPasswordScreen.screenID);
+                },
+                child: Text(
+                  'Forgot Password?',
+                  style: ApexTextStyles.kOrange16,
+                ),
+              ),
+              Spacer()
+            ],
+          ),
+        ),
+        ApexButton(
+          onPressed: () async {
+            final navigator = Navigator.of(context);
+            if (hasText) {
+              loader.load();
+              try {
+                User user = await AuthService().loginUser(
+                    email: _emailTC.text, password: _passwordTC.text);
+                loader.stop();
+                AlertHandler.showPopup(
+                  context: context,
+                  alert: 'Welcome back ${user.fullName}',
+                  onPressed: () => navigator.pushNamed(DashBoard.screenID,
+                      arguments: UserArguments(user: user)),
+                );
+              } catch (_) {
+                loader.stop();
+                AlertHandler.showErrorPopup(
+                    context: context,
+                    error: 'Incorrect email or password. Please try again');
+              }
+            } else {
+              AlertHandler.showErrorPopup(
+                  context: context, error: 'Please fill all fields');
             }
-          } else {
-          //TODO: Show Unfilled text popup
-          }
-        },
-        text: 'Sign In',
-        enabled: hasText,
-      ),
-      GoogleApple()
-    ],
+          },
+          text: 'Sign In',
+          enabled: hasText,
+        ),
+        GoogleApple()
+      ],
     );
   }
 
