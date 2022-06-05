@@ -50,6 +50,7 @@ flutter:
     - assets/images/device_two.png
     - assets/images/google.png
     - assets/images/password_lock.png
+    - assets/images/pin_created.png
 
   fonts:
     - family: SFProDisplay
