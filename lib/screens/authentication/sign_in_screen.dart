@@ -98,6 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
               User user = await AuthService().loginUser(email: _emailTC.text, password: _passwordTC.text);
               loader.stop();
               //TODO: show popup to navigate to dashboard with User
+              print(user.fullName);
              // Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
             } catch (error) {
               //TODO: Handle Error with error codes

@@ -29,8 +29,8 @@ dependencies:
   loading_animation_widget: ^1.2.0+1
   font_awesome_flutter: ^10.1.0
   smooth_page_indicator: ^1.0.0+2
-  shared_preferences: ^2.0.15
   http: ^0.13.4
+  flutter_otp_text_field: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +48,7 @@ flutter:
     - assets/images/illustration_two.png
     - assets/images/device_two.png
     - assets/images/google.png
+    - assets/images/password_lock.png
 
   fonts:
     - family: SFProDisplay

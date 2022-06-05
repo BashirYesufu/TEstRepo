@@ -1,4 +1,7 @@
+import 'package:apex/screens/authentication/email_verification_screen.dart';
 import 'package:apex/screens/authentication/forgot_password_screen.dart';
+import 'package:apex/screens/authentication/new_password_screen.dart';
+import 'package:apex/screens/authentication/password_confirmation_screen.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
 import 'package:apex/screens/dashboard.dart';
@@ -14,6 +17,9 @@ class RouteHandler {
     SignInScreen.screenID: (context) => SignInScreen(),
     SignUpScreen.screenID: (context) => SignUpScreen(),
     ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
+    EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(email: 'email.com'),
+    NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
+    PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
   };
   static Route<dynamic>? generateRoute(RouteSettings route) {
     switch (route.name) {
