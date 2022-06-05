@@ -122,7 +122,6 @@ class EmailVerificationScreen extends StatelessWidget {
               );
             } catch (e) {
               loader.stop();
-              print(e);
               AlertHandler.showErrorPopup(
                 context: context,
                 error:
