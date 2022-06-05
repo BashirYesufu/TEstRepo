@@ -1,7 +1,9 @@
+import 'package:apex/screens/authentication/country_residence_screen.dart';
 import 'package:apex/screens/authentication/email_verification_screen.dart';
 import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/new_password_screen.dart';
 import 'package:apex/screens/authentication/password_confirmation_screen.dart';
+import 'package:apex/screens/authentication/pin_code_screen.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
 import 'package:apex/screens/dashboard.dart';
@@ -20,6 +22,8 @@ class RouteHandler {
     EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(email: 'email.com'),
     NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
     PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
+    CountryResidence.screenID: (context) => CountryResidence(),
+    PinCodeScreen.screenID: (context) => PinCodeScreen(),
   };
   static Route<dynamic>? generateRoute(RouteSettings route) {
     switch (route.name) {

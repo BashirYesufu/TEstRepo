@@ -3,8 +3,6 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/apex_images.dart';
 import 'package:flutter/material.dart';
-import 'package:apex/screens/dashboard.dart';
-import '../dashboard_arguments.dart';
 
 class PasswordConfirmationScreen extends StatelessWidget {
   const PasswordConfirmationScreen({Key? key}) : super(key: key);

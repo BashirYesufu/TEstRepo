@@ -9,6 +9,7 @@ class ApexTextField extends StatefulWidget {
   final TextInputType? keyboard;
   final String? hintText;
   final bool obscureText;
+  final bool readOnly;
 
   const ApexTextField({
     this.controller,
@@ -17,6 +18,7 @@ class ApexTextField extends StatefulWidget {
     this.hintText,
     this.onChanged,
     this.obscureText = false,
+    this.readOnly = false,
     Key? key,
   }) : super(key: key);
 
@@ -39,6 +41,7 @@ class _ApexTextFieldState extends State<ApexTextField> {
         cursorColor: ApexColors.black,
         obscureText: widget.obscureText,
         onChanged: widget.onChanged,
+        readOnly: widget.readOnly,
         style: ApexTextStyles.kBlack16,
         decoration: InputDecoration(
           hintStyle: ApexTextStyles.kAsh16,

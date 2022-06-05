@@ -3,6 +3,7 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
+import 'package:apex/screens/authentication/country_residence_screen.dart';
 import 'package:apex/screens/authentication/new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -44,9 +45,6 @@ class EmailVerificationScreen extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
             ),
           ),
-          onCodeChanged: (String code) {
-            //handle validation or checks here
-          },
           //runs when every textfield is filled
           onSubmit: (String verificationCode) {
             showDialog(
@@ -61,7 +59,7 @@ class EmailVerificationScreen extends StatelessWidget {
         ),
       ),
       InkWell(
-        onTap: (){
+        onTap: () {
           //TODO: Resend OTP to email
         },
         child: Text(
@@ -69,12 +67,16 @@ class EmailVerificationScreen extends StatelessWidget {
           style: ApexTextStyles.kOrange16,
         ),
       ),
-      SizedBox(height: MediaQuery.of(context).size.height / 8,),
-      ApexButton(onPressed: (){
-        //TODO: confirm OTP
-        Navigator.pushNamed(context, NewPasswordScreen.screenID);
-      }, text: 'Confirm',),
-
+      SizedBox(
+        height: MediaQuery.of(context).size.height / 8,
+      ),
+      ApexButton(
+        onPressed: () {
+          //TODO: confirm OTP
+          Navigator.pushNamed(context, CountryResidence.screenID);
+        },
+        text: 'Confirm',
+      ),
     ]);
   }
 }

@@ -11,19 +11,26 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ApexScaffold(children: [
-      ScreenTitle(
+    return ApexScaffold(
+      children: [
+        ScreenTitle(
           title: 'Password Recovery',
-          subTitle: 'Enter your registered email below to receive password instructions',
-      ),
-      ApexTextField(
-        hintText: 'Email',
-      ),
-      SizedBox(height: MediaQuery.of(context).size.height / 6,),
-      ApexButton(onPressed: (){
-        Navigator.pushNamed(context, EmailVerificationScreen.screenID);
-      }, text: 'Send verification code'),
-
-    ]);
+          subTitle:
+              'Enter your registered email below to receive password instructions',
+        ),
+        ApexTextField(
+          hintText: 'Email',
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 6,
+        ),
+        ApexButton(
+          onPressed: () {
+            Navigator.pushNamed(context, EmailVerificationScreen.screenID);
+          },
+          text: 'Send verification code',
+        ),
+      ],
+    );
   }
 }
