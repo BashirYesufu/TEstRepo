@@ -65,8 +65,8 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
       ApexTextField(
         hintText: 'Password',
-        obscureText: true,
         controller: _passwordTC,
+        hasObscuringSuffix: true,
         onChanged: (value) {
           checkButton();
         },

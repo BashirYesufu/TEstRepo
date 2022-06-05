@@ -27,11 +27,11 @@ class NewPasswordScreen extends StatelessWidget {
         ),
         ApexTextField(
           hintText: 'Password',
-          obscureText: true,
+          hasObscuringSuffix: true,
         ),
         ApexTextField(
           hintText: 'Confirm password',
-          obscureText: true,
+          hasObscuringSuffix: true,
         ),
       ],
     );

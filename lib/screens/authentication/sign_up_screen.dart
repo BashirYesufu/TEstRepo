@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _nameTC = TextEditingController();
 
   bool hasText = false;
+  bool showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +87,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         ApexTextField(
           hintText: 'Password',
-          obscureText: true,
           controller: _passwordTC,
+          hasObscuringSuffix: true,
           onChanged: (value) {
             checkButton();
           },

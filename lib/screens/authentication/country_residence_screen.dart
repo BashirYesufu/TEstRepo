@@ -36,6 +36,7 @@ class CountryResidence extends StatelessWidget {
         ),
         Consumer<CountryPickerProvider>(
           builder: (context, provider, _) => ApexTextField(
+            suffix: Icon(Icons.keyboard_arrow_down, color: ApexColors.darkGrey,),
             readOnly: true,
             controller: TextEditingController(
                 text: '${provider.flag} ${provider.country}'),

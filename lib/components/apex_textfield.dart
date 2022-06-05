@@ -8,8 +8,9 @@ class ApexTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final TextInputType? keyboard;
   final String? hintText;
-  final bool obscureText;
   final bool readOnly;
+  final bool hasObscuringSuffix;
+  final Widget? suffix;
 
   const ApexTextField({
     this.controller,
@@ -17,7 +18,8 @@ class ApexTextField extends StatefulWidget {
     this.keyboard = TextInputType.text,
     this.hintText,
     this.onChanged,
-    this.obscureText = false,
+    this.suffix,
+    this.hasObscuringSuffix = false,
     this.readOnly = false,
     Key? key,
   }) : super(key: key);
@@ -28,8 +30,8 @@ class ApexTextField extends StatefulWidget {
 
 class _ApexTextFieldState extends State<ApexTextField> {
   _ApexTextFieldState();
+  late bool obscure = true;
 
-  bool get hasText => widget.controller?.text == '';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +41,7 @@ class _ApexTextFieldState extends State<ApexTextField> {
         keyboardType: widget.keyboard,
         controller: widget.controller,
         cursorColor: ApexColors.black,
-        obscureText: widget.obscureText,
+        obscureText: widget.hasObscuringSuffix ? obscure : false,
         onChanged: widget.onChanged,
         readOnly: widget.readOnly,
         style: ApexTextStyles.kBlack16,
@@ -58,6 +60,16 @@ class _ApexTextFieldState extends State<ApexTextField> {
             borderSide: BorderSide(color: ApexColors.orange, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
+          suffixIcon: widget.hasObscuringSuffix ? InkWell(
+              onTap: (){
+                setState(() {
+                  obscure = !obscure;
+                });
+              },
+              child: obscure ?
+              Icon(Icons.visibility_off_outlined, color: ApexColors.darkGrey,) :
+              Icon(Icons.visibility_outlined, color: ApexColors.darkGrey,),
+          ) : widget.suffix,
         ),
       ),
     );
