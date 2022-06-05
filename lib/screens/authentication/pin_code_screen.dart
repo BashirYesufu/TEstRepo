@@ -1,6 +1,8 @@
+import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
+import 'package:apex/screens/authentication/pin_created_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
@@ -13,6 +15,10 @@ class PinCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ApexScaffold(
+      bottomNavBar: ApexButton(onPressed: (){
+        //TODO Create User with Pin
+        Navigator.pushNamed(context, PinCreatedScreen.screenID);
+      }, text: 'Create PIN'),
       children: [
         ScreenTitle(
           title: 'Set your PIN code',
