@@ -1,6 +1,5 @@
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
-import 'package:apex/screens/user_arguments.dart';
 import 'package:apex/utilities/alert_handler.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
@@ -10,8 +9,8 @@ import '../../components/apex_button.dart';
 import '../../components/apex_textfield.dart';
 import '../../components/google_apple.dart';
 import '../../constants/text_styles.dart';
-import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
+import '../../utilities/provider/providers/user_provider.dart';
 import 'email_verification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -33,6 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final loader = Provider.of<LoadingStateProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     return ApexScaffold(
         hasBackButton: false,
         bottomNavBar: RichText(
@@ -109,19 +109,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   String token =
                   await AuthService().getEmailToken(email: _emailTC.text);
                   loader.stop();
-                  User user = User(
-                    fullName: _nameTC.text,
-                    email: _emailTC.text,
-                  );
+                  userProvider.setUserEmail(email: _emailTC.text);
+                  userProvider.setUserFullName(fullName: _nameTC.text);
+                  userProvider.setUserPassword(password: _passwordTC.text);
                   AlertHandler.showPopup(
                     context: context,
                     alert: 'Your OTP is $token',
-                    onPressed: () => navigator.pushNamed(
-                        EmailVerificationScreen.screenID,
-                        arguments: UserArguments(user: user, password: _passwordTC.text)),
+                    onPressed: () => navigator.pushNamed(EmailVerificationScreen.screenID),
                   );
-                } catch (_) {
+                } catch (e) {
                   loader.stop();
+                  print(e);
                   AlertHandler.showErrorPopup(context: context, error: 'An error occurred while creating your account. Please try again');
                 }
               } else {
@@ -132,7 +130,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             enabled: hasText,
           ),
           GoogleApple()
-        ]);
+        ],
+    );
   }
 
   // Validate if textfields contain text

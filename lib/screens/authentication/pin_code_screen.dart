@@ -5,7 +5,6 @@ import 'package:apex/constants/color_constants.dart';
 import 'package:apex/screens/authentication/pin_created_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-
 import '../../constants/text_styles.dart';
 
 class PinCodeScreen extends StatelessWidget {

@@ -22,9 +22,10 @@ class RouteHandler {
     ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
     NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
     PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
-    CountryResidence.screenID: (context) => CountryResidence(),
-    PinCodeScreen.screenID: (context) => PinCodeScreen(),
+    EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(),
+    CountryResidenceScreen.screenID: (context) => CountryResidenceScreen(),
     PinCreatedScreen.screenID: (context) => PinCreatedScreen(),
+    PinCodeScreen.screenID: (context) => PinCodeScreen(),
   };
   static Route<dynamic>? generateRoute(RouteSettings route) {
     switch (route.name) {
@@ -33,11 +34,7 @@ class RouteHandler {
         return MaterialPageRoute(builder: (context) {
           return DashBoard(user: args.user);
         });
-      case EmailVerificationScreen.screenID:
-        final args = route.arguments as UserArguments;
-        return MaterialPageRoute(builder: (context) {
-          return EmailVerificationScreen(user: args.user);
-        });
+
       default:
         return null;
     }

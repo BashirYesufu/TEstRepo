@@ -5,29 +5,29 @@ import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
 import 'package:apex/screens/authentication/country_residence_screen.dart';
 import 'package:apex/utilities/alert_handler.dart';
+import 'package:apex/utilities/provider/providers/user_provider.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
-import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
-  EmailVerificationScreen({this.user, Key? key}) : super(key: key);
+  EmailVerificationScreen({Key? key}) : super(key: key);
   static const screenID = "EmailVerification";
-  final User? user;
 
   @override
   Widget build(BuildContext context) {
     String token = '';
     final loader = Provider.of<LoadingStateProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     final navigator = Navigator.of(context);
     return ApexScaffold(
       children: [
         ScreenTitle(
           title: 'Verify it\'s you',
           subTitle:
-              'We sent a code to ( ${user?.email} ). Enter it here to verify your identity',
+              'We sent a code to ( ${userProvider.user.email} ). Enter it here to verify your identity',
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -59,14 +59,14 @@ class EmailVerificationScreen extends StatelessWidget {
               try {
                 loader.load();
                 await AuthService()
-                    .verifyEmailToken(email: '${user?.email}', token: token);
+                    .verifyEmailToken(email: '${userProvider.user.email}', token: token);
                 loader.stop();
                 AlertHandler.showPopup(
                   context: context,
                   alert:
                       'Your email has been verified. Please select your country',
                   onPressed: () =>
-                      navigator.pushNamed(CountryResidence.screenID),
+                      navigator.pushNamed(CountryResidenceScreen.screenID),
                 );
               } catch (e) {
                 loader.stop();
@@ -84,12 +84,12 @@ class EmailVerificationScreen extends StatelessWidget {
           onTap: () async {
             try {
               loader.load();
-              String token = await AuthService().getEmailToken(email: '${user?.email}');
+              String token = await AuthService().getEmailToken(email: '${userProvider.user.email}');
               loader.stop();
               AlertHandler.showPopup(
                   context: context,
                   alert:
-                      'Another token has been sent to ${user?.email}, '
+                      'Another token has been sent to ${userProvider.user.email}, '
                           'Enter it here to verify your identity $token',);
             } catch (_) {
               loader.stop();
@@ -112,13 +112,13 @@ class EmailVerificationScreen extends StatelessWidget {
             try {
               loader.load();
               await AuthService()
-                  .verifyEmailToken(email: '${user?.email}', token: token);
+                  .verifyEmailToken(email: '${userProvider.user.email}', token: token);
               loader.stop();
               AlertHandler.showPopup(
                 context: context,
                 alert:
                     'Your email has been verified. Please select your country',
-                onPressed: () => navigator.pushNamed(CountryResidence.screenID),
+                onPressed: () => navigator.pushNamed(CountryResidenceScreen.screenID),
               );
             } catch (e) {
               loader.stop();

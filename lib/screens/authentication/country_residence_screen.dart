@@ -4,29 +4,42 @@ import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/screens/authentication/pin_code_screen.dart';
 import 'package:apex/utilities/provider/providers/country_picker_provider.dart';
+import 'package:apex/utilities/provider/providers/user_provider.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/color_constants.dart';
 import '../../constants/text_styles.dart';
+import '../../utilities/alert_handler.dart';
 
-class CountryResidence extends StatelessWidget {
-  const CountryResidence({Key? key}) : super(key: key);
+class CountryResidenceScreen extends StatelessWidget {
+  const CountryResidenceScreen({Key? key}) : super(key: key);
   static const screenID = "CountryResidence";
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return ApexScaffold(
       onBackPressed: (){
         final countryProvider = Provider.of<CountryPickerProvider>(context, listen: false);
         countryProvider.clearCountryDetails();
         Navigator.pop(context);
       },
-      bottomNavBar: ApexButton(
-        onPressed: () {
-          Navigator.pushNamed(context, PinCodeScreen.screenID);
-        },
-        text: 'Continue',
+      bottomNavBar: Consumer<CountryPickerProvider>(
+        builder: (context, provider, _) => ApexButton(
+          onPressed: () {
+            if (provider.countryCode.isNotEmpty) {
+              userProvider.setUserCountryCode(code: provider.countryCode);
+              Navigator.pushNamed(context, PinCodeScreen.screenID);
+            } else {
+              AlertHandler.showErrorPopup(
+                context: context,
+                error: 'Please select a country',
+              );
+            }
+          },
+          text: 'Continue',
+        ),
       ),
       children: [
         ScreenTitle(
@@ -73,6 +86,7 @@ class CountryResidence extends StatelessWidget {
                     countryName: country.name,
                     countryCode: country.countryCode,
                   );
+                  userProvider.setUserCountryCode(code: country.countryCode);
                 },
               );
             },
