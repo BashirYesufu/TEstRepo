@@ -13,6 +13,7 @@ class ApexScaffold extends StatelessWidget {
   final Widget? bottomNavBar;
   final bool hasBackButton;
   final List<Widget>? trailing;
+  final Function()? onBackPressed;
 
   const ApexScaffold({
     required this.children,
@@ -21,6 +22,7 @@ class ApexScaffold extends StatelessWidget {
     this.bottomNavBar,
     this.hasBackButton = true,
     this.trailing,
+    this.onBackPressed,
     Key? key,
   }) : super(key: key);
 
@@ -44,7 +46,9 @@ class ApexScaffold extends StatelessWidget {
               elevation: 0,
               centerTitle: true,
               leading: hasBackButton
-                  ? ApexBackButton()
+                  ? ApexBackButton(onPressed:
+              onBackPressed ?? ()=> Navigator.pop(context)
+              ,)
                   : SizedBox(),
               actions: trailing,
             ),

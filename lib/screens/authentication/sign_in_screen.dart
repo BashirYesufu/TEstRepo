@@ -1,16 +1,18 @@
 import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
-import 'package:apex/constants/color_constants.dart';
 import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
+import 'package:apex/screens/dashboard.dart';
+import 'package:apex/screens/dashboard_arguments.dart';
+import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../components/apex_icon_button.dart';
+import '../../components/google_apple.dart';
 import '../../components/screen_title.dart';
 import '../../constants/text_styles.dart';
+import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -75,7 +77,6 @@ class _SignInScreenState extends State<SignInScreen> {
           children: [
             InkWell(
               onTap: () {
-                //TODO: Navigate to forgot password screen
                   Navigator.pushNamed(
                       context, ForgotPasswordScreen.screenID);
               },
@@ -89,64 +90,31 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
       ApexButton(
-        onPressed: () {
+        onPressed: () async {
           //TODO: Login User
-          loader.load();
+          if (hasText) {
+            loader.load();
+            try {
+              User user = await AuthService().loginUser(email: _emailTC.text, password: _passwordTC.text);
+              loader.stop();
+              //TODO: show popup to navigate to dashboard with User
+              print(user.fullName);
+             // Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
+            } catch (error) {
+              //TODO: Handle Error with error codes
+              loader.stop();
+              print(error);
+            }
+          } else {
+          //TODO: Show Unfilled text popup
+          }
         },
         text: 'Sign In',
         enabled: hasText,
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 30.0),
-        child: Row(
-          children: [
-            Flexible(
-              child: Container(
-                height: 2,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      ApexColors.white,
-                      ApexColors.grey
-                    ]
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: Text('OR', style: ApexTextStyles.kDarkGrey16,),
-            ),
-            Flexible(
-              child: Container(
-                height: 2,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        ApexColors.grey,
-                        ApexColors.white,
-                      ]
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      Row(
-        children: [
-          ApexIconButton(
-            child: FaIcon(FontAwesomeIcons.google, size: 30,),
-          ),
-          SizedBox(width: 20,),
-          ApexIconButton(
-            child: FaIcon(FontAwesomeIcons.apple, size: 30,),
-          ),
-        ],
-      )
-    ]);
+      GoogleApple()
+    ],
+    );
   }
 
   checkButton() {

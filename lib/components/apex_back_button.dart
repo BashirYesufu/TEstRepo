@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../constants/color_constants.dart';
 
 class ApexBackButton extends StatelessWidget {
-  const ApexBackButton({Key? key}) : super(key: key);
+  const ApexBackButton({
+    this.onPressed,
+    Key? key}) : super(key: key);
 
+  final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
@@ -20,9 +23,7 @@ class ApexBackButton extends StatelessWidget {
               )
           ),
           child: MaterialButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
+            onPressed: onPressed,
             minWidth: 30.0,
             height: 30.0,
             child: Icon(Icons.arrow_back_ios),

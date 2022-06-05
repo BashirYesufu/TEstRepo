@@ -9,6 +9,12 @@ class ApexTextStyles {
       fontSize: 28.0,
       fontWeight: FontWeight.w900
   );
+  static const kOrangeBold28 = TextStyle(
+      fontFamily: ApexFonts.sfProDisplay,
+      color: ApexColors.orange,
+      fontSize: 28.0,
+      fontWeight: FontWeight.w900
+  );
   static const kWhiteBold16 = TextStyle(
     fontFamily: ApexFonts.sfProDisplay,
     color: ApexColors.white,
