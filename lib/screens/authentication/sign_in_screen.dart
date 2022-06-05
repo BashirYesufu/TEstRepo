@@ -43,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   style: ApexTextStyles.kOrange16,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                           context, SignUpScreen.screenID);
                     }),
             ],

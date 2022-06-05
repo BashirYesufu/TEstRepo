@@ -19,7 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
       bottomNavBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: ApexButton(onPressed: (){
-          Navigator.pushNamed(context, SignInScreen.screenID);
+          Navigator.pushReplacementNamed(context, SignInScreen.screenID);
         }, text: 'Get Started',),
       ),
       trailing: [
@@ -27,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
           offset: Offset(-20.0, 0.0),
           child: InkWell(
             onTap: (){
-              Navigator.pushNamed(context, SignInScreen.screenID);
+              Navigator.pushReplacementNamed(context, SignInScreen.screenID);
             },
             child: Text('Skip', style: ApexTextStyles.kOrange16,),),
         )
