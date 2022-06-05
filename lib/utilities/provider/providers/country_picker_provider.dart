@@ -14,4 +14,11 @@ class CountryPickerProvider with ChangeNotifier{
     _countryCode = countryCode;
     notifyListeners();
   }
+
+  clearCountryDetails(){
+    _countryName = '';
+    _countryFlag = '';
+    _countryCode = '';
+    notifyListeners();
+  }
 }

@@ -7,7 +7,6 @@ import 'package:apex/utilities/provider/providers/country_picker_provider.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants/color_constants.dart';
 import '../../constants/text_styles.dart';
 
@@ -18,6 +17,11 @@ class CountryResidence extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ApexScaffold(
+      onBackPressed: (){
+        final countryProvider = Provider.of<CountryPickerProvider>(context, listen: false);
+        countryProvider.clearCountryDetails();
+        Navigator.pop(context);
+      },
       bottomNavBar: ApexButton(
         onPressed: () {
           Navigator.pushNamed(context, PinCodeScreen.screenID);
