@@ -3,8 +3,6 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/screens/authentication/forgot_password_screen.dart';
 import 'package:apex/screens/authentication/sign_up_screen.dart';
-import 'package:apex/screens/dashboard.dart';
-import 'package:apex/screens/dashboard_arguments.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
