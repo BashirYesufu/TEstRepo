@@ -1,6 +1,5 @@
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:flutter/material.dart';
-
 import '../../components/apex_button.dart';
 import '../../components/screen_title.dart';
 import '../../constants/apex_images.dart';

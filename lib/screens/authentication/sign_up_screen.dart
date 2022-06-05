@@ -98,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
            //TODO: Navigate to email verification
             Navigator.pushNamed(context, EmailVerificationScreen.screenID);
           },
-          text: 'Sign In',
+          text: 'Sign Up',
           enabled: hasText,
         ),
         GoogleApple()
