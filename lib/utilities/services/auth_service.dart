@@ -85,4 +85,20 @@ class AuthService {
       rethrow;
     }
   }
+
+  Future<String> verifyEmailToken({required String email, required String token}) async {
+    dynamic body = {
+      'email': email,
+      'token': token,
+    };
+    try {
+      var url = Uri.parse(ApiEndPoints.verifyToken);
+      var response = await http.post(url, body: body);
+      var jsonResponse = jsonDecode(response.body.toString()) as Map<String, dynamic>;
+      String email = jsonResponse['data']['email'];
+      return email;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

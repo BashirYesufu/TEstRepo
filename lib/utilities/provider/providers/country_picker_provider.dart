@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class CountryPickerProvider with ChangeNotifier{
-  String _countryName = '';
+  String _countryName = 'Country';
   String get country => _countryName;
   String _countryFlag = '';
   String get flag => _countryFlag;
