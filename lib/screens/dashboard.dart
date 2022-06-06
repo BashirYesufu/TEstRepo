@@ -2,12 +2,12 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/constants/text_styles.dart';
 import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:apex/utilities/services/auth_service.dart';
+import 'package:apex/utilities/services/dashboard_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
 import '../utilities/alert_handler.dart';
 import '../utilities/provider/providers/loading_provider.dart';
-import '../utilities/provider/providers/user_provider.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({required this.user, Key? key}) : super(key: key);
@@ -21,12 +21,7 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
 
   User get user => widget.user;
-  @override
-  void initState() {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    print(userProvider.token);
-    super.initState();
-  }
+  String secret = 'secret';
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +70,20 @@ class _DashBoardState extends State<DashBoard> {
             ),
           ),
         ),
-        TextButton(
-          onPressed: () async {},
-          child: Text('test'),
-        )
+        FutureBuilder<String>(
+          future: DashBoardService().getDashBoardSecret(token: user.token), // function where api call is made
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {  // AsyncSnapshot<Your object type>
+            if( snapshot.connectionState == ConnectionState.waiting){
+              return loader.load();
+            }else{
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                return Center(child: Text('${snapshot.data}'));
+              }  // snapshot.data  :- get your object which is pass from your downloadData() function
+            }
+          },
+        ),
       ],
     );
   }
