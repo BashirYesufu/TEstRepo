@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../components/apex_button.dart';
 import '../../components/screen_title.dart';
 import '../../constants/apex_images.dart';
+import '../dashboard.dart';
 
 class PinCreatedScreen extends StatelessWidget {
   const PinCreatedScreen({Key? key}) : super(key: key);
@@ -14,8 +15,7 @@ class PinCreatedScreen extends StatelessWidget {
       hasBackButton: false,
       bottomNavBar: ApexButton(
         onPressed: () {
-          //TODO: Login with new password and go to dashboard
-          //Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
+          Navigator.pushNamed(context, DashBoard.screenID);
         },
         text: 'Proceed to home',
       ),

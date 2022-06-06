@@ -33,13 +33,8 @@ class UserProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  setUserCountryCode({required String code}){
-    _user.phoneCountry = code;
-    notifyListeners();
-  }
-
-  setUserCountry({required String country}){
-    _user.country = country;
+  setUserCountry({required String code}){
+    _user.country = code;
     notifyListeners();
   }
 

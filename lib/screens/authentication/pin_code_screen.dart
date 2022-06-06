@@ -3,9 +3,14 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/screens/authentication/pin_created_screen.dart';
+import 'package:apex/utilities/alert_handler.dart';
+import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:provider/provider.dart';
 import '../../constants/text_styles.dart';
+import '../../utilities/provider/providers/loading_provider.dart';
+import '../../utilities/provider/providers/user_provider.dart';
 
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({Key? key}) : super(key: key);
@@ -13,11 +18,43 @@ class PinCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final loader = Provider.of<LoadingStateProvider>(context);
     return ApexScaffold(
-      bottomNavBar: ApexButton(onPressed: (){
-        //TODO Create User with Pin
-        Navigator.pushNamed(context, PinCreatedScreen.screenID);
-      }, text: 'Create PIN'),
+      bottomNavBar: ApexButton(
+        onPressed: () async {
+          print(userProvider.user.email);
+          print(userProvider.user.fullName);
+          print(userProvider.password);
+          print(userProvider.user.country);
+          try {
+            loader.load();
+            await AuthService().createUser(
+              email: userProvider.user.email,
+              fullName: userProvider.user.fullName,
+              password: userProvider.password,
+              country: userProvider.user.country,
+              username: '',
+            );
+            loader.stop();
+            AlertHandler.showPopup(
+              context: context,
+              alert: 'Your pin has been created. Please go to the dashboard',
+              onPressed: () =>
+                  Navigator.pushNamed(context, PinCreatedScreen.screenID),
+            );
+          } catch (e) {
+            loader.stop();
+            print(e);
+            AlertHandler.showErrorPopup(
+              context: context,
+              error:
+                  'An error occurred while creating your pin. Please try again',
+            );
+          }
+        },
+        text: 'Create PIN',
+      ),
       children: [
         ScreenTitle(
           title: 'Set your PIN code',
@@ -38,15 +75,33 @@ class PinCodeScreen extends StatelessWidget {
             enabledBorderColor: ApexColors.orange,
             focusedBorderColor: ApexColors.orange,
             //runs when every textfield is filled
-            onSubmit: (String verificationCode) {
-              showDialog(
+            onSubmit: (String code) async {
+              try {
+                loader.load();
+                await AuthService().createUser(
+                  email: userProvider.user.email,
+                  fullName: userProvider.user.fullName,
+                  password: userProvider.password,
+                  country: userProvider.user.country,
+                  username: '',
+                );
+                loader.stop();
+                AlertHandler.showPopup(
                   context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Verification Code"),
-                      content: Text('Code entered is $verificationCode'),
-                    );
-                  });
+                  alert:
+                      'Your pin has been created. Please go to the dashboard',
+                  onPressed: () =>
+                      Navigator.pushNamed(context, PinCreatedScreen.screenID),
+                );
+              } catch (e) {
+                loader.stop();
+                print(e);
+                AlertHandler.showErrorPopup(
+                  context: context,
+                  error:
+                      'An error occurred while creating your pin. Please try again',
+                );
+              }
             }, // end onSubmit
           ),
         ),

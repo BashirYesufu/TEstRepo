@@ -123,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   AlertHandler.showErrorPopup(context: context, error: 'An error occurred while creating your account. Please try again');
                 }
               } else {
-                AlertHandler.showErrorPopup(context: context, error: 'Please fill all fields');
+                AlertHandler.showErrorPopup(context: context, error: 'Please fill all fields. Passwords must contain at least one uppercase, lowercase, number and special character');
               }
             },
             text: 'Sign Up',
@@ -136,9 +136,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // Validate if textfields contain text
   checkButton() {
+    bool hasNum = _passwordTC.text.contains(RegExp(r'[0-9]'));
+    print(hasNum);
     setState(() {
       if (_emailTC.text.isNotEmpty &&
           _passwordTC.text.isNotEmpty &&
+          hasNum &&
           _nameTC.text.isNotEmpty) {
         hasText = true;
       } else {

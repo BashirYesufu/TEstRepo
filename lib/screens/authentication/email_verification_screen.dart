@@ -21,7 +21,6 @@ class EmailVerificationScreen extends StatelessWidget {
     String token = '';
     final loader = Provider.of<LoadingStateProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
-    final navigator = Navigator.of(context);
     return ApexScaffold(
       children: [
         ScreenTitle(
@@ -59,14 +58,13 @@ class EmailVerificationScreen extends StatelessWidget {
               try {
                 loader.load();
                 await AuthService()
-                    .verifyEmailToken(email: '${userProvider.user.email}', token: token);
+                    .verifyEmailToken(email: userProvider.user.email, token: token);
                 loader.stop();
                 AlertHandler.showPopup(
                   context: context,
                   alert:
                       'Your email has been verified. Please select your country',
-                  onPressed: () =>
-                      navigator.pushNamed(CountryResidenceScreen.screenID),
+                  onPressed: () => Navigator.pushNamed(context, CountryResidenceScreen.screenID),
                 );
               } catch (e) {
                 loader.stop();
@@ -84,7 +82,7 @@ class EmailVerificationScreen extends StatelessWidget {
           onTap: () async {
             try {
               loader.load();
-              String token = await AuthService().getEmailToken(email: '${userProvider.user.email}');
+              String token = await AuthService().getEmailToken(email: userProvider.user.email);
               loader.stop();
               AlertHandler.showPopup(
                   context: context,
@@ -112,13 +110,13 @@ class EmailVerificationScreen extends StatelessWidget {
             try {
               loader.load();
               await AuthService()
-                  .verifyEmailToken(email: '${userProvider.user.email}', token: token);
+                  .verifyEmailToken(email: userProvider.user.email, token: token);
               loader.stop();
               AlertHandler.showPopup(
                 context: context,
                 alert:
                     'Your email has been verified. Please select your country',
-                onPressed: () => navigator.pushNamed(CountryResidenceScreen.screenID),
+                onPressed: () => Navigator.pushNamed(context, CountryResidenceScreen.screenID),
               );
             } catch (e) {
               loader.stop();

@@ -9,14 +9,14 @@ class AuthService {
     required String fullName,
     required String password,
     String? username,
-    String? country,
+    required String country,
   }) async {
     dynamic body = {
       'full_name': fullName,
-      //'username': username,
+      'username': username,
       'email': email,
-      'password': password,
       'country': country,
+      'password': password,
       'device_name': 'web'
     };
     try {
@@ -25,7 +25,8 @@ class AuthService {
         url,
         body: body,
       );
-      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      var jsonResponse = jsonDecode(response.body.toString()) as Map<String, dynamic>;
+      print(jsonResponse);
       var result = jsonResponse['data']['user'];
       return User(
         id: result['id'],

@@ -29,7 +29,7 @@ class CountryResidenceScreen extends StatelessWidget {
         builder: (context, provider, _) => ApexButton(
           onPressed: () {
             if (provider.countryCode.isNotEmpty) {
-              userProvider.setUserCountryCode(code: provider.countryCode);
+              userProvider.setUserCountry(code: provider.countryCode);
               Navigator.pushNamed(context, PinCodeScreen.screenID);
             } else {
               AlertHandler.showErrorPopup(
@@ -86,7 +86,7 @@ class CountryResidenceScreen extends StatelessWidget {
                     countryName: country.name,
                     countryCode: country.countryCode,
                   );
-                  userProvider.setUserCountryCode(code: country.countryCode);
+                  userProvider.setUserCountry(code: country.countryCode);
                 },
               );
             },
