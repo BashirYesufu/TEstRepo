@@ -2,11 +2,11 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/screens/user_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../components/apex_button.dart';
-import '../../components/screen_title.dart';
-import '../../constants/apex_images.dart';
-import '../../utilities/provider/providers/user_provider.dart';
-import '../dashboard.dart';
+import '../../../components/apex_button.dart';
+import '../../../components/screen_title.dart';
+import '../../../constants/apex_images.dart';
+import '../../../utilities/provider/providers/user_provider.dart';
+import '../../dashboard.dart';
 
 class PinCreatedScreen extends StatelessWidget {
   const PinCreatedScreen({Key? key}) : super(key: key);

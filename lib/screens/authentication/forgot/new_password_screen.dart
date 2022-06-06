@@ -1,9 +1,9 @@
 import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
-import 'package:apex/screens/authentication/password_confirmation_screen.dart';
+import 'package:apex/screens/authentication/forgot/password_confirmation_screen.dart';
 import 'package:flutter/material.dart';
-import '../../components/apex_textfield.dart';
+import '../../../components/apex_textfield.dart';
 
 class NewPasswordScreen extends StatelessWidget {
   const NewPasswordScreen({Key? key}) : super(key: key);

@@ -2,15 +2,15 @@ import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
-import 'package:apex/screens/authentication/pin_created_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_created_screen.dart';
 import 'package:apex/utilities/alert_handler.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
-import '../../constants/text_styles.dart';
-import '../../utilities/provider/providers/loading_provider.dart';
-import '../../utilities/provider/providers/user_provider.dart';
+import '../../../constants/text_styles.dart';
+import '../../../utilities/provider/providers/loading_provider.dart';
+import '../../../utilities/provider/providers/user_provider.dart';
 
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({Key? key}) : super(key: key);

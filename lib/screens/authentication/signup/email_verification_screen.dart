@@ -3,14 +3,14 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
-import 'package:apex/screens/authentication/country_residence_screen.dart';
+import 'package:apex/screens/authentication/signup/country_residence_screen.dart';
 import 'package:apex/utilities/alert_handler.dart';
 import 'package:apex/utilities/provider/providers/user_provider.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
-import '../../utilities/provider/providers/loading_provider.dart';
+import '../../../utilities/provider/providers/loading_provider.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   EmailVerificationScreen({Key? key}) : super(key: key);

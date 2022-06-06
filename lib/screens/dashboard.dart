@@ -1,6 +1,6 @@
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/constants/text_styles.dart';
-import 'package:apex/screens/authentication/sign_in_screen.dart';
+import 'package:apex/screens/authentication/signin/sign_in_screen.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:apex/utilities/services/dashboard_service.dart';
 import 'package:flutter/material.dart';
