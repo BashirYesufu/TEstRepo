@@ -120,9 +120,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       navigator.pushNamed(EmailVerificationScreen.screenID);
                     }
                   );
-                } catch (e) {
+                } catch (_) {
                   loader.stop();
-                  print(e);
                   AlertHandler.showErrorPopup(context: context, error: 'An error occurred while creating your account. Please try again');
                 }
               } else {
@@ -140,7 +139,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // Validate if textfields contain text
   checkButton() {
     bool hasNum = _passwordTC.text.contains(RegExp(r'[0-9]'));
-    print(hasNum);
     setState(() {
       if (_emailTC.text.isNotEmpty &&
           _passwordTC.text.isNotEmpty &&

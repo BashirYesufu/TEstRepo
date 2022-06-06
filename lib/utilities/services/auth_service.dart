@@ -26,7 +26,6 @@ class AuthService {
         body: body,
       );
       var jsonResponse = jsonDecode(response.body.toString()) as Map<String, dynamic>;
-      print(jsonResponse);
       var result = jsonResponse['data']['user'];
       return User(
         id: result['id'],

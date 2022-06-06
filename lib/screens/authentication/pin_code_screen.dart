@@ -73,9 +73,8 @@ class PinCodeScreen extends StatelessWidget {
         alert: 'Your pin has been created. Please go to the dashboard',
         onPressed: () => Navigator.pushNamed(context, PinCreatedScreen.screenID),
       );
-    } catch (e) {
+    } catch (_) {
       loader.stop();
-      print(e);
       AlertHandler.showErrorPopup(
         context: context,
         error:
