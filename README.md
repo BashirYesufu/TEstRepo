@@ -15,7 +15,7 @@ You must have Flutter and Dart Installed to build this project. Check the links 
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/FTD-Logistics/Customer-Mobile.git
+https://github.com/BashirYesufu/apex.git
 ```
 
 **Step 2:**
@@ -32,18 +32,13 @@ Run your simulator for iOS or android emulator and smash the build button. Easy 
 
 ### Libraries & Tools Used
 
-* [Dio] - Networking
+* [HTTP] - Networking
 * [Provider] - State Management
 * [Shared Preferences] - Local Data Persistence
 * [Loading_Animation Widget] - Custom Loading State Widget
-* [Flutter Markdown] - Displaying L
-* [Provider] - State Management
-* [OTP Text Field] - Custom 4-Digit OTP Textfield
-* [Flutter Paystack] - Handling Payment collection
-* [email_validator] - Validating Email field
+* [OTP Text Field] - Custom Digit OTP Textfield
 * [Modal Progress Hud NSN] - Loading 
-* [Open Mail App] - Package For Opening All Mail Apps on Phone.
-* [Google Maps Flutter] - Displaying Maps on Screen
+* [Country Picker] - For displaying bottom sheet of countries 
 
 
 ### Folder Structure
@@ -65,10 +60,8 @@ lib/
 |- components/
 |- constants/
 |- models/
-|- providers/
 |- screens/
 |- utilities/
-|- widgets/
 |- main.dart
 |- routes.dart
 ```
@@ -78,11 +71,9 @@ Now, lets dive into the lib folder which has the main code for the application.
 ```
 1 - components - All the reuseable UIs and methods are defined in files and contained in folders.
 2 - constants - All the application level constants are defined in this directory with-in their respective files. This directory contains the constants for `colors`, `icons`, `images`, `keys`, `methods`, `paddings`, `strings` and `textstyles`.
-3 - data - Contains the data layer of your project, includes directories for local, network and shared pref/cache.
-4 - stores - Contains store(s) for state-management of your application, to connect the reactive data of your application with the UI. 
-5 - ui — Contains all the ui of your project, contains sub directory for each screen.
-6 - util — Contains the utilities/common functions of your application.
-7 - widgets — Contains the common widgets for your applications. For example, Button, TextField etc.
+3 - models - Contains data structure models
+4 - screens - contains all the screens of the app
+5 - utilities - Contain services and utilities
 8 - routes.dart — This file contains all the routes for your application.
 9 - main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 ```
