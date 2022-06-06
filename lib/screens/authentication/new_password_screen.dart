@@ -14,7 +14,6 @@ class NewPasswordScreen extends StatelessWidget {
     return ApexScaffold(
       bottomNavBar: ApexButton(
         onPressed: (){
-          //TODO: create new password
           Navigator.pushNamed(context, PasswordConfirmationScreen.screenID);
         },
         text: 'Create new password',
@@ -27,11 +26,11 @@ class NewPasswordScreen extends StatelessWidget {
         ),
         ApexTextField(
           hintText: 'Password',
-          obscureText: true,
+          hasObscuringSuffix: true,
         ),
         ApexTextField(
           hintText: 'Confirm password',
-          obscureText: true,
+          hasObscuringSuffix: true,
         ),
       ],
     );

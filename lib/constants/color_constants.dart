@@ -9,4 +9,5 @@ class ApexColors {
   static const lightGrey = Color(0xFFF9FAFB);
   static const ash = Color(0xFF9CA3AF);
   static const lightBlack = Color(0xFF404653);
+  static const red = Color(0xFFEB001B);
 }

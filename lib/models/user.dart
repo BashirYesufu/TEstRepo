@@ -1,15 +1,15 @@
 class User {
-  String id, fullName, email;
-  String? userName, phone, phoneCountry, country, avatar;
+  String id, fullName, email, country;
+  String? userName, phone, phoneCountry, avatar;
 
  User({
-   required this.id,
-   required this.fullName,
-   required this.email,
+   this.id = '',
+   this.fullName = '',
+   this.email = '',
    this.userName,
    this.phone,
    this.phoneCountry,
-   this.country,
+   this.country = '',
    this.avatar,
 });
 }
