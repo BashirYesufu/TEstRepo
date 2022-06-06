@@ -38,7 +38,6 @@ class RouteHandler {
         return MaterialPageRoute(builder: (context) {
           return DashBoard(user: args.user);
         });
-
       default:
         return null;
     }

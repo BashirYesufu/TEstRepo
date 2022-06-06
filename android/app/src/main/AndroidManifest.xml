@@ -2,7 +2,7 @@
     package="com.example.apex">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="apex"
+        android:label="Apex"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -51,15 +51,13 @@ class ForgotVerificationScreen extends StatelessWidget {
             ),
             //runs when every textfield is filled
             onSubmit: (String verificationCode) async {
-                loader.load();
-                Future.delayed(Duration(seconds: 2));
-                loader.stop();
-                AlertHandler.showPopup(
-                  context: context,
-                  alert:
-                  'Your email has been verified. Please create a new password',
-                  onPressed: () => Navigator.pushNamed(context, NewPasswordScreen.screenID),
-                );
+                  AlertHandler.showPopup(
+                    context: context,
+                    hasCloseButton: true,
+                    alert:
+                    'Your email has been verified. Please create a new password',
+                    onPressed: () => Navigator.pushNamed(context, NewPasswordScreen.screenID),
+                  );
             }, // end onSubmit
           ),
         ),
@@ -86,9 +84,6 @@ class ForgotVerificationScreen extends StatelessWidget {
         ),
         ApexButton(
           onPressed: () {
-            loader.load();
-            Future.delayed(Duration(seconds: 2));
-            loader.stop();
             AlertHandler.showPopup(
               context: context,
               hasCloseButton: false,
