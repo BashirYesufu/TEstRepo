@@ -1,16 +1,16 @@
 import 'package:apex/components/apex_scaffold.dart';
-import 'package:apex/screens/authentication/sign_in_screen.dart';
+import 'package:apex/screens/authentication/signin/sign_in_screen.dart';
 import 'package:apex/utilities/alert_handler.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../components/apex_button.dart';
-import '../../components/apex_textfield.dart';
-import '../../components/google_apple.dart';
-import '../../constants/text_styles.dart';
-import '../../utilities/provider/providers/loading_provider.dart';
-import '../../utilities/provider/providers/user_provider.dart';
+import '../../../components/apex_button.dart';
+import '../../../components/apex_textfield.dart';
+import '../../../components/google_apple.dart';
+import '../../../constants/text_styles.dart';
+import '../../../utilities/provider/providers/loading_provider.dart';
+import '../../../utilities/provider/providers/user_provider.dart';
 import 'email_verification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {

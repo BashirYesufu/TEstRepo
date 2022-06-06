@@ -1,7 +1,7 @@
 import 'package:apex/components/apex_button.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
-import 'package:apex/screens/authentication/sign_in_screen.dart';
+import 'package:apex/screens/authentication/signin/sign_in_screen.dart';
 import 'package:apex/screens/onboarding/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

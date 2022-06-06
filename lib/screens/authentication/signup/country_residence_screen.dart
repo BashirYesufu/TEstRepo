@@ -2,15 +2,15 @@ import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
 import 'package:apex/components/screen_title.dart';
-import 'package:apex/screens/authentication/pin_code_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_code_screen.dart';
 import 'package:apex/utilities/provider/providers/country_picker_provider.dart';
 import 'package:apex/utilities/provider/providers/user_provider.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../constants/color_constants.dart';
-import '../../constants/text_styles.dart';
-import '../../utilities/alert_handler.dart';
+import '../../../constants/color_constants.dart';
+import '../../../constants/text_styles.dart';
+import '../../../utilities/alert_handler.dart';
 
 class CountryResidenceScreen extends StatelessWidget {
   const CountryResidenceScreen({Key? key}) : super(key: key);

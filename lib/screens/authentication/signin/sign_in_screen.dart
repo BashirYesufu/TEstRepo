@@ -1,21 +1,21 @@
 import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/apex_textfield.dart';
-import 'package:apex/screens/authentication/forgot_password_screen.dart';
-import 'package:apex/screens/authentication/sign_up_screen.dart';
+import 'package:apex/screens/authentication/forgot/forgot_password_screen.dart';
+import 'package:apex/screens/authentication/signup/sign_up_screen.dart';
 import 'package:apex/screens/dashboard.dart';
 import 'package:apex/utilities/services/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../components/google_apple.dart';
-import '../../components/screen_title.dart';
-import '../../constants/text_styles.dart';
-import '../../models/user.dart';
-import '../../utilities/alert_handler.dart';
-import '../../utilities/provider/providers/loading_provider.dart';
-import '../../utilities/shared_pref.dart';
-import '../user_arguments.dart';
+import '../../../components/google_apple.dart';
+import '../../../components/screen_title.dart';
+import '../../../constants/text_styles.dart';
+import '../../../models/user.dart';
+import '../../../utilities/alert_handler.dart';
+import '../../../utilities/provider/providers/loading_provider.dart';
+import '../../../utilities/shared_pref.dart';
+import '../../user_arguments.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key? key}) : super(key: key);

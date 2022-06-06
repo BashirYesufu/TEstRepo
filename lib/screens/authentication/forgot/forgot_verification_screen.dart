@@ -3,12 +3,12 @@ import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/color_constants.dart';
 import 'package:apex/constants/text_styles.dart';
-import 'package:apex/screens/authentication/new_password_screen.dart';
+import 'package:apex/screens/authentication/forgot/new_password_screen.dart';
 import 'package:apex/utilities/alert_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
-import '../../utilities/provider/providers/loading_provider.dart';
+import '../../../utilities/provider/providers/loading_provider.dart';
 
 
 class ForgotVerificationScreen extends StatelessWidget {
