@@ -8,14 +8,6 @@ class UserProvider with ChangeNotifier{
   String _password = '';
   String get password => _password;
 
-  String _token = '';
-  String get token => _token;
-
-  setUserToken({required String token}){
-    _token = token;
-    notifyListeners();
-  }
-
   setUserID({required String id}){
     _user.id = id;
     notifyListeners();

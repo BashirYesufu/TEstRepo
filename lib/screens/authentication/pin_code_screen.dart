@@ -9,10 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
 import '../../constants/text_styles.dart';
-import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 import '../../utilities/provider/providers/user_provider.dart';
-import '../../utilities/shared_pref.dart';
 
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({Key? key}) : super(key: key);
@@ -60,15 +58,13 @@ class PinCodeScreen extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       loader.load();
-      User user = await AuthService().createUser(
+      await AuthService().createUser(
         email: userProvider.user.email,
         fullName: userProvider.user.fullName,
         password: userProvider.password,
         country: userProvider.user.country,
         username: '',
       );
-      userProvider.setUserToken(token: user.token);
-      Shared.setString(Shared.userToken, user.token);
       loader.stop();
       AlertHandler.showPopup(
         context: context,

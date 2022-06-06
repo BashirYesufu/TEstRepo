@@ -14,7 +14,6 @@ import '../../constants/text_styles.dart';
 import '../../models/user.dart';
 import '../../utilities/alert_handler.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
-import '../../utilities/provider/providers/user_provider.dart';
 import '../../utilities/shared_pref.dart';
 import '../user_arguments.dart';
 
@@ -45,7 +44,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final loader = Provider.of<LoadingStateProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context);
     return ApexScaffold(
       hasBackButton: false,
       bottomNavBar: RichText(
@@ -110,9 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
               try {
                 User user = await AuthService().loginUser(
                     email: _emailTC.text, password: _passwordTC.text);
-                userProvider.setUserToken(token: user.token);
                 Shared.setString(Shared.userEmail, user.email);
-                Shared.setString(Shared.userToken, user.token);
                 loader.stop();
                 AlertHandler.showPopup(
                   context: context,
