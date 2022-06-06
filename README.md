@@ -3,14 +3,18 @@
 A Finance App for Smart Pay.
 
 ## Getting Started
-This repository contain the code for the Apex App. This project was written using the Flutter SDK and Dart programming Language. If you're new to Flutter and Dart, Check out the SDK at https://www.flutter.dev and the language at https://dart.dev/.
+This repository contain the code for the Apex App. This project was written using the Flutter 3.0.0 SDK and Dart programming Language. If you're new to Flutter and Dart, Check out the SDK at https://www.flutter.dev and the language at https://dart.dev/.
 
 ## How to Use 
 
 **Step 1:**
 
 
-You must have Flutter and Dart Installed to build this project. Check the links above if you haven't done so.
+You must have Flutter 3.0.0 and Dart Installed to build this project. Check the links above if you haven't done so. You might experience build issues running on a lower flutter version. If you don't have flutter 3.0.0, You can you fvm to download it and manage your flutter version locally. I have included a link to it.
+
+```
+https://fvm.app/
+```
 
 Download or clone this repo by using the link below:
 
@@ -84,18 +88,15 @@ This directory contains all the application level constants. A separate file is 
 
 ```
 constants/
-|- app_theme.dart
-|- dimens.dart
-|- endpoints.dart
-|- preferences.dart
-|- strings.dart
+|- apex_colors.dart
+|- apex_images.dart
+|- string_literals.dart
+|- apex_textstyle.dart
 ```
-
-
 
 ### Routes
 
-This file contains all the routes for your application.
+This file contains all the routes for the application.
 
 ```dart
 import 'package:apex/screens/authentication/signup/country_residence_screen.dart';
