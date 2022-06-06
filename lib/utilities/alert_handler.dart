@@ -19,11 +19,13 @@ class AlertHandler {
   static Widget? showPopup(
       {required BuildContext context,
       required String alert,
+        bool hasCloseButton = true,
       Function()? onPressed}) {
     AlertHandler().showApexPopup(context, (context) {
       return ApexAlert(
         alert: alert,
         onPressed: onPressed,
+        hasCloseButton: hasCloseButton,
       );
     });
     return null;

@@ -9,17 +9,19 @@ class ApexAlert extends StatelessWidget {
     required this.alert,
     this.onPressed,
     this.isError = false,
+    this.hasCloseButton = true,
     Key? key,
   }) : super(key: key);
 
   final String alert;
   final Function()? onPressed;
   final bool isError;
+  final bool hasCloseButton;
 
   @override
   Widget build(BuildContext context) {
     return CustomDialog(children: [
-      Row(
+      hasCloseButton ? Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           InkWell(
@@ -29,7 +31,7 @@ class ApexAlert extends StatelessWidget {
               child: Icon(Icons.close),
           )
         ],
-      ),
+      ) : SizedBox(),
       Text(
         'Apex Finance',
         style: ApexTextStyles.kOrangeBold28,

@@ -15,6 +15,7 @@ import '../../models/user.dart';
 import '../../utilities/alert_handler.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 import '../../utilities/provider/providers/user_provider.dart';
+import '../../utilities/shared_pref.dart';
 import '../user_arguments.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -30,6 +31,16 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordTC = TextEditingController();
 
   bool hasText = false;
+
+  @override
+  void initState() {
+    setDef();
+    super.initState();
+  }
+
+  setDef() async {
+    _emailTC.text = await Shared.getString(Shared.userEmail) ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +70,13 @@ class _SignInScreenState extends State<SignInScreen> {
           title: 'Hi There! 👋 ',
           subTitle: 'Welcome back, Sign in to your account',
         ),
-        ApexTextField(
-          hintText: 'Email',
-          controller: _emailTC,
-          onChanged: (value) {
-            checkButton();
-          },
-        ),
+       ApexTextField(
+            hintText: 'Email',
+            controller: _emailTC,
+            onChanged: (value) {
+              checkButton();
+            },
+          ),
         ApexTextField(
           hintText: 'Password',
           controller: _passwordTC,
@@ -100,6 +111,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 User user = await AuthService().loginUser(
                     email: _emailTC.text, password: _passwordTC.text);
                 userProvider.setUserToken(token: user.token);
+                Shared.setString(Shared.userEmail, user.email);
+                Shared.setString(Shared.userToken, user.token);
                 loader.stop();
                 AlertHandler.showPopup(
                   context: context,

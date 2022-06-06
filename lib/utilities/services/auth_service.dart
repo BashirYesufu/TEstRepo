@@ -103,4 +103,19 @@ class AuthService {
       rethrow;
     }
   }
+
+  Future<bool> logOutUser({required String email}) async {
+    dynamic body = {
+      'email': email,
+    };
+    try {
+      var url = Uri.parse(ApiEndPoints.signOut);
+      var response = await http.post(url, body: body);
+      var jsonResponse = jsonDecode(response.body.toString()) as Map<String, dynamic>;
+      bool success = jsonResponse['status'];
+      return success;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
