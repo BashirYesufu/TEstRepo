@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
 import '../../constants/text_styles.dart';
+import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 import '../../utilities/provider/providers/user_provider.dart';
 
@@ -29,19 +30,22 @@ class PinCodeScreen extends StatelessWidget {
           print(userProvider.user.country);
           try {
             loader.load();
-            await AuthService().createUser(
+            User user = await AuthService().createUser(
               email: userProvider.user.email,
               fullName: userProvider.user.fullName,
               password: userProvider.password,
               country: userProvider.user.country,
               username: '',
             );
+            userProvider.setUserToken(token: user.token);
             loader.stop();
             AlertHandler.showPopup(
               context: context,
               alert: 'Your pin has been created. Please go to the dashboard',
-              onPressed: () =>
-                  Navigator.pushNamed(context, PinCreatedScreen.screenID),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, PinCreatedScreen.screenID);
+              }
             );
           } catch (e) {
             loader.stop();

@@ -37,6 +37,7 @@ class AuthService {
         phoneCountry: result['phone_country'],
         country: result['country'],
         avatar: result['avatar'],
+        token: jsonResponse['data']['token'],
       );
     } catch (e) {
       rethrow;
@@ -66,6 +67,7 @@ class AuthService {
         phoneCountry: result['phone_country'],
         country: result['country'],
         avatar: result['avatar'],
+        token: jsonResponse['data']['token'],
       );
     } catch (e) {
       rethrow;

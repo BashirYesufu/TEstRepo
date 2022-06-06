@@ -1,5 +1,5 @@
 class User {
-  String id, fullName, email, country;
+  String id, fullName, email, country, token;
   String? userName, phone, phoneCountry, avatar;
 
  User({
@@ -11,5 +11,6 @@ class User {
    this.phoneCountry,
    this.country = '',
    this.avatar,
+   this.token = '',
 });
 }

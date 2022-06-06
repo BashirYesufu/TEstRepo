@@ -3,10 +3,21 @@ import 'package:apex/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import '../models/user.dart';
 
-class DashBoard extends StatelessWidget {
+class DashBoard extends StatefulWidget {
   const DashBoard({required this.user, Key? key}) : super(key: key);
   static const screenID = "DashBoard";
   final User user;
+
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,4 +33,6 @@ class DashBoard extends StatelessWidget {
       ],
     );
   }
+
+
 }

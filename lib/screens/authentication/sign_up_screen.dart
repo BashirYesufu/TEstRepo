@@ -115,7 +115,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   AlertHandler.showPopup(
                     context: context,
                     alert: 'Your OTP is $token',
-                    onPressed: () => navigator.pushNamed(EmailVerificationScreen.screenID),
+                    onPressed: (){
+                      navigator.pop();
+                      navigator.pushNamed(EmailVerificationScreen.screenID);
+                    }
                   );
                 } catch (e) {
                   loader.stop();
@@ -123,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   AlertHandler.showErrorPopup(context: context, error: 'An error occurred while creating your account. Please try again');
                 }
               } else {
-                AlertHandler.showErrorPopup(context: context, error: 'Please fill all fields. Passwords must contain at least one uppercase, lowercase, number and special character');
+                AlertHandler.showErrorPopup(context: context, error: 'Please fill all fields. Passwords must contain at least one uppercase, lowercase, number, special character and up to 8 characters long');
               }
             },
             text: 'Sign Up',
@@ -142,6 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (_emailTC.text.isNotEmpty &&
           _passwordTC.text.isNotEmpty &&
           hasNum &&
+          _passwordTC.text.length > 7 &&
           _nameTC.text.isNotEmpty) {
         hasText = true;
       } else {
