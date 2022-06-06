@@ -11,10 +11,14 @@ class Shared {
     await prefs.setBool(key, value);
   }
 
-  static Future<bool?> getBoolean(String key) async {
+  static Future<bool> getBoolean(String key) async {
     final prefs = await SharedPreferences.getInstance();
     final bool? value = prefs.getBool(key);
-    return value;
+    if (value == true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   static Future<void> setString(String key, String value) async {
