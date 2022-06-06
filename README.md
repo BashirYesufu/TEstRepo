@@ -3,19 +3,23 @@
 A Finance App for Smart Pay.
 
 ## Getting Started
-This repository contain the code for the Apex App. This project was written using the Flutter SDK and Dart programming Language. If you're new to Flutter and Dart, Check out the SDK at https://www.flutter.dev and the language at https://dart.dev/.
+This repository contain the code for the Apex App. This project was written using the Flutter 3.0.0 SDK and Dart programming Language. If you're new to Flutter and Dart, Check out the SDK at https://www.flutter.dev and the language at https://dart.dev/.
 
 ## How to Use 
 
 **Step 1:**
 
 
-You must have Flutter and Dart Installed to build this project. Check the links above if you haven't done so.
+You must have Flutter 3.0.0 and Dart Installed to build this project. Check the links above if you haven't done so. You might experience build issues running on a lower flutter version. If you don't have flutter 3.0.0, You can you fvm to download it and manage your flutter version locally. I have included a link to it.
+
+```
+https://fvm.app/
+```
 
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/FTD-Logistics/Customer-Mobile.git
+https://github.com/BashirYesufu/apex.git
 ```
 
 **Step 2:**
@@ -32,18 +36,13 @@ Run your simulator for iOS or android emulator and smash the build button. Easy 
 
 ### Libraries & Tools Used
 
-* [Dio] - Networking
+* [HTTP] - Networking
 * [Provider] - State Management
 * [Shared Preferences] - Local Data Persistence
 * [Loading_Animation Widget] - Custom Loading State Widget
-* [Flutter Markdown] - Displaying L
-* [Provider] - State Management
-* [OTP Text Field] - Custom 4-Digit OTP Textfield
-* [Flutter Paystack] - Handling Payment collection
-* [email_validator] - Validating Email field
+* [OTP Text Field] - Custom Digit OTP Textfield
 * [Modal Progress Hud NSN] - Loading 
-* [Open Mail App] - Package For Opening All Mail Apps on Phone.
-* [Google Maps Flutter] - Displaying Maps on Screen
+* [Country Picker] - For displaying bottom sheet of countries 
 
 
 ### Folder Structure
@@ -65,10 +64,8 @@ lib/
 |- components/
 |- constants/
 |- models/
-|- providers/
 |- screens/
 |- utilities/
-|- widgets/
 |- main.dart
 |- routes.dart
 ```
@@ -78,13 +75,11 @@ Now, lets dive into the lib folder which has the main code for the application.
 ```
 1 - components - All the reuseable UIs and methods are defined in files and contained in folders.
 2 - constants - All the application level constants are defined in this directory with-in their respective files. This directory contains the constants for `colors`, `icons`, `images`, `keys`, `methods`, `paddings`, `strings` and `textstyles`.
-3 - data - Contains the data layer of your project, includes directories for local, network and shared pref/cache.
-4 - stores - Contains store(s) for state-management of your application, to connect the reactive data of your application with the UI. 
-5 - ui — Contains all the ui of your project, contains sub directory for each screen.
-6 - util — Contains the utilities/common functions of your application.
-7 - widgets — Contains the common widgets for your applications. For example, Button, TextField etc.
-8 - routes.dart — This file contains all the routes for your application.
-9 - main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
+3 - models - Contains data structure models
+4 - screens - contains all the screens of the app
+5 - utilities - Contain services and utilities
+6 - routes.dart — This file contains all the routes for your application.
+7 - main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 ```
 
 ### Constants
@@ -93,103 +88,61 @@ This directory contains all the application level constants. A separate file is 
 
 ```
 constants/
-|- app_theme.dart
-|- dimens.dart
-|- endpoints.dart
-|- preferences.dart
-|- strings.dart
-```
-
-### Data
-
-All the business logic of your application will go into this directory, it represents the data layer of your application. It is sub-divided into three directories `local`, `network` and `sharedperf`, each containing the domain specific logic. Since each layer exists independently, that makes it easier to unit test. The communication between UI and data layer is handled by using central repository.
-
-```
-data/
-|- local/
-    |- constants/
-    |- datasources/
-    |- app_database.dart
-   
-|- network/
-    |- constants/
-    |- exceptions/
-    |- rest_client.dart
-    
-|- sharedpref
-    |- constants/
-    |- shared_preference_helper.dart
-    
-|- repository.dart
-```
-
-### Stores
-
-The store is where all your application state lives in flutter. The Store is basically a widget that stands at the top of the widget tree and passes it's data down using special methods. In-case of multiple stores, a separate folder for each store is created as shown in the example below:
-
-```
-stores/
-|- login/
-    |- login_store.dart
-    |- form_validator.dart
-```
-
-### UI
-
-This directory contains all the ui of your application. Each screen is located in a separate folder making it easy to combine group of files related to that particular screen. All the screen specific widgets will be placed in `widgets` directory as shown in the example below:
-
-```
-ui/
-|- login
-   |- login_screen.dart
-   |- widgets
-      |- login_form.dart
-      |- login_button.dart
-```
-
-### Utils
-
-Contains the common file(s) and utilities used in a project. The folder structure is as follows: 
-
-```
-utils/
-|- encryption
-   |- xxtea.dart
-|- date
-  |- date_time.dart
-```
-
-### Widgets
-
-Contains the common widgets that are shared across multiple screens. For example, Button, TextField etc.
-
-```
-widgets/
-|- app_icon_widget.dart
-|- empty_app_bar.dart
-|- progress_indicator.dart
+|- apex_colors.dart
+|- apex_images.dart
+|- string_literals.dart
+|- apex_textstyle.dart
 ```
 
 ### Routes
 
-This file contains all the routes for your application.
+This file contains all the routes for the application.
 
 ```dart
+import 'package:apex/screens/authentication/signup/country_residence_screen.dart';
+import 'package:apex/screens/authentication/signup/email_verification_screen.dart';
+import 'package:apex/screens/authentication/forgot/forgot_password_screen.dart';
+import 'package:apex/screens/authentication/forgot/forgot_verification_screen.dart';
+import 'package:apex/screens/authentication/forgot/new_password_screen.dart';
+import 'package:apex/screens/authentication/forgot/password_confirmation_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_code_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_created_screen.dart';
+import 'package:apex/screens/authentication/signin/sign_in_screen.dart';
+import 'package:apex/screens/authentication/signup/sign_up_screen.dart';
+import 'package:apex/screens/dashboard.dart';
+import 'package:apex/screens/user_arguments.dart';
+import 'package:apex/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
-import 'ui/home/home.dart';
-import 'ui/login/login.dart';
-import 'ui/splash/splash.dart';
-class Routes {
-  Routes._();
-  //static variables
-  static const String splash = '/splash';
-  static const String login = '/login';
-  static const String home = '/home';
-  static final routes = <String, WidgetBuilder>{
-    splash: (BuildContext context) => SplashScreen(),
-    login: (BuildContext context) => LoginScreen(),
-    home: (BuildContext context) => HomeScreen(),
+
+class RouteHandler {
+  static String initialRoute = OnBoardingScreen.screenID;
+
+  static String onBoardedRoute = SignInScreen.screenID;
+
+  static Map<String, Widget Function(BuildContext)> routes = {
+    OnBoardingScreen.screenID: (context) => OnBoardingScreen(),
+    SignInScreen.screenID: (context) => SignInScreen(),
+    SignUpScreen.screenID: (context) => SignUpScreen(),
+    ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
+    NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
+    PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
+    EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(),
+    CountryResidenceScreen.screenID: (context) => CountryResidenceScreen(),
+    PinCreatedScreen.screenID: (context) => PinCreatedScreen(),
+    PinCodeScreen.screenID: (context) => PinCodeScreen(),
+    ForgotVerificationScreen.screenID: (context) => ForgotVerificationScreen(),
   };
+  static Route<dynamic>? generateRoute(RouteSettings route) {
+    switch (route.name) {
+      case DashBoard.screenID:
+        final args = route.arguments as UserArguments;
+        return MaterialPageRoute(builder: (context) {
+          return DashBoard(user: args.user);
+        });
+      default:
+        return null;
+    }
+  }
 }
 ```
 
@@ -198,32 +151,28 @@ class Routes {
 This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 
 ```dart
-import 'package:boilerplate/routes.dart';
+import 'package:apex/routes.dart';
+import 'package:apex/utilities/provider/provider_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'constants/app_theme.dart';
-import 'constants/strings.dart';
-import 'ui/splash/splash.dart';
+import 'package:provider/provider.dart';
+
 void main() {
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  runApp(const Apex());
 }
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+class Apex extends StatelessWidget {
+  const Apex({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: Strings.appName,
-      theme: themeData,
-      routes: Routes.routes,
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: ProviderList.providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: RouteHandler.initialRoute,
+        routes: RouteHandler.routes,
+        onGenerateRoute: RouteHandler.generateRoute,
+      ),
     );
   }
 }
