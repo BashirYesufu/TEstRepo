@@ -19,43 +19,10 @@ class PinCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    final loader = Provider.of<LoadingStateProvider>(context);
     return ApexScaffold(
       bottomNavBar: ApexButton(
-        onPressed: () async {
-          print(userProvider.user.email);
-          print(userProvider.user.fullName);
-          print(userProvider.password);
-          print(userProvider.user.country);
-          try {
-            loader.load();
-            User user = await AuthService().createUser(
-              email: userProvider.user.email,
-              fullName: userProvider.user.fullName,
-              password: userProvider.password,
-              country: userProvider.user.country,
-              username: '',
-            );
-            userProvider.setUserToken(token: user.token);
-            loader.stop();
-            AlertHandler.showPopup(
-              context: context,
-              alert: 'Your pin has been created. Please go to the dashboard',
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, PinCreatedScreen.screenID);
-              }
-            );
-          } catch (e) {
-            loader.stop();
-            print(e);
-            AlertHandler.showErrorPopup(
-              context: context,
-              error:
-                  'An error occurred while creating your pin. Please try again',
-            );
-          }
+        onPressed: () {
+          createUserAccount(context);
         },
         text: 'Create PIN',
       ),
@@ -79,37 +46,41 @@ class PinCodeScreen extends StatelessWidget {
             enabledBorderColor: ApexColors.orange,
             focusedBorderColor: ApexColors.orange,
             //runs when every textfield is filled
-            onSubmit: (String code) async {
-              try {
-                loader.load();
-                await AuthService().createUser(
-                  email: userProvider.user.email,
-                  fullName: userProvider.user.fullName,
-                  password: userProvider.password,
-                  country: userProvider.user.country,
-                  username: '',
-                );
-                loader.stop();
-                AlertHandler.showPopup(
-                  context: context,
-                  alert:
-                      'Your pin has been created. Please go to the dashboard',
-                  onPressed: () =>
-                      Navigator.pushNamed(context, PinCreatedScreen.screenID),
-                );
-              } catch (e) {
-                loader.stop();
-                print(e);
-                AlertHandler.showErrorPopup(
-                  context: context,
-                  error:
-                      'An error occurred while creating your pin. Please try again',
-                );
-              }
+            onSubmit: (_) async {
+             createUserAccount(context);
             }, // end onSubmit
           ),
         ),
       ],
     );
+  }
+  void createUserAccount(BuildContext context) async {
+    final loader = Provider.of<LoadingStateProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      loader.load();
+      User user = await AuthService().createUser(
+        email: userProvider.user.email,
+        fullName: userProvider.user.fullName,
+        password: userProvider.password,
+        country: userProvider.user.country,
+        username: '',
+      );
+      userProvider.setUserToken(token: user.token);
+      loader.stop();
+      AlertHandler.showPopup(
+        context: context,
+        alert: 'Your pin has been created. Please go to the dashboard',
+        onPressed: () => Navigator.pushNamed(context, PinCreatedScreen.screenID),
+      );
+    } catch (e) {
+      loader.stop();
+      print(e);
+      AlertHandler.showErrorPopup(
+        context: context,
+        error:
+        'An error occurred while creating your pin. Please try again',
+      );
+    }
   }
 }
