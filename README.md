@@ -74,8 +74,8 @@ Now, lets dive into the lib folder which has the main code for the application.
 3 - models - Contains data structure models
 4 - screens - contains all the screens of the app
 5 - utilities - Contain services and utilities
-8 - routes.dart — This file contains all the routes for your application.
-9 - main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
+6 - routes.dart — This file contains all the routes for your application.
+7 - main.dart - This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 ```
 
 ### Constants
@@ -91,96 +91,57 @@ constants/
 |- strings.dart
 ```
 
-### Data
 
-All the business logic of your application will go into this directory, it represents the data layer of your application. It is sub-divided into three directories `local`, `network` and `sharedperf`, each containing the domain specific logic. Since each layer exists independently, that makes it easier to unit test. The communication between UI and data layer is handled by using central repository.
-
-```
-data/
-|- local/
-    |- constants/
-    |- datasources/
-    |- app_database.dart
-   
-|- network/
-    |- constants/
-    |- exceptions/
-    |- rest_client.dart
-    
-|- sharedpref
-    |- constants/
-    |- shared_preference_helper.dart
-    
-|- repository.dart
-```
-
-### Stores
-
-The store is where all your application state lives in flutter. The Store is basically a widget that stands at the top of the widget tree and passes it's data down using special methods. In-case of multiple stores, a separate folder for each store is created as shown in the example below:
-
-```
-stores/
-|- login/
-    |- login_store.dart
-    |- form_validator.dart
-```
-
-### UI
-
-This directory contains all the ui of your application. Each screen is located in a separate folder making it easy to combine group of files related to that particular screen. All the screen specific widgets will be placed in `widgets` directory as shown in the example below:
-
-```
-ui/
-|- login
-   |- login_screen.dart
-   |- widgets
-      |- login_form.dart
-      |- login_button.dart
-```
-
-### Utils
-
-Contains the common file(s) and utilities used in a project. The folder structure is as follows: 
-
-```
-utils/
-|- encryption
-   |- xxtea.dart
-|- date
-  |- date_time.dart
-```
-
-### Widgets
-
-Contains the common widgets that are shared across multiple screens. For example, Button, TextField etc.
-
-```
-widgets/
-|- app_icon_widget.dart
-|- empty_app_bar.dart
-|- progress_indicator.dart
-```
 
 ### Routes
 
 This file contains all the routes for your application.
 
 ```dart
+import 'package:apex/screens/authentication/signup/country_residence_screen.dart';
+import 'package:apex/screens/authentication/signup/email_verification_screen.dart';
+import 'package:apex/screens/authentication/forgot/forgot_password_screen.dart';
+import 'package:apex/screens/authentication/forgot/forgot_verification_screen.dart';
+import 'package:apex/screens/authentication/forgot/new_password_screen.dart';
+import 'package:apex/screens/authentication/forgot/password_confirmation_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_code_screen.dart';
+import 'package:apex/screens/authentication/signup/pin_created_screen.dart';
+import 'package:apex/screens/authentication/signin/sign_in_screen.dart';
+import 'package:apex/screens/authentication/signup/sign_up_screen.dart';
+import 'package:apex/screens/dashboard.dart';
+import 'package:apex/screens/user_arguments.dart';
+import 'package:apex/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
-import 'ui/home/home.dart';
-import 'ui/login/login.dart';
-import 'ui/splash/splash.dart';
-class Routes {
-  Routes._();
-  //static variables
-  static const String splash = '/splash';
-  static const String login = '/login';
-  static const String home = '/home';
-  static final routes = <String, WidgetBuilder>{
-    splash: (BuildContext context) => SplashScreen(),
-    login: (BuildContext context) => LoginScreen(),
-    home: (BuildContext context) => HomeScreen(),
+
+class RouteHandler {
+  static String initialRoute = OnBoardingScreen.screenID;
+
+  static String onBoardedRoute = SignInScreen.screenID;
+
+  static Map<String, Widget Function(BuildContext)> routes = {
+    OnBoardingScreen.screenID: (context) => OnBoardingScreen(),
+    SignInScreen.screenID: (context) => SignInScreen(),
+    SignUpScreen.screenID: (context) => SignUpScreen(),
+    ForgotPasswordScreen.screenID: (context) => ForgotPasswordScreen(),
+    NewPasswordScreen.screenID: (context) => NewPasswordScreen(),
+    PasswordConfirmationScreen.screenID: (context) => PasswordConfirmationScreen(),
+    EmailVerificationScreen.screenID: (context) => EmailVerificationScreen(),
+    CountryResidenceScreen.screenID: (context) => CountryResidenceScreen(),
+    PinCreatedScreen.screenID: (context) => PinCreatedScreen(),
+    PinCodeScreen.screenID: (context) => PinCodeScreen(),
+    ForgotVerificationScreen.screenID: (context) => ForgotVerificationScreen(),
   };
+  static Route<dynamic>? generateRoute(RouteSettings route) {
+    switch (route.name) {
+      case DashBoard.screenID:
+        final args = route.arguments as UserArguments;
+        return MaterialPageRoute(builder: (context) {
+          return DashBoard(user: args.user);
+        });
+      default:
+        return null;
+    }
+  }
 }
 ```
 
@@ -189,32 +150,28 @@ class Routes {
 This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 
 ```dart
-import 'package:boilerplate/routes.dart';
+import 'package:apex/routes.dart';
+import 'package:apex/utilities/provider/provider_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'constants/app_theme.dart';
-import 'constants/strings.dart';
-import 'ui/splash/splash.dart';
+import 'package:provider/provider.dart';
+
 void main() {
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  runApp(const Apex());
 }
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+class Apex extends StatelessWidget {
+  const Apex({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: Strings.appName,
-      theme: themeData,
-      routes: Routes.routes,
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: ProviderList.providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: RouteHandler.initialRoute,
+        routes: RouteHandler.routes,
+        onGenerateRoute: RouteHandler.generateRoute,
+      ),
     );
   }
 }
