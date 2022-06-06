@@ -47,7 +47,7 @@ class DashBoard extends StatelessWidget {
             },
             child: Text(
               'Logout',
-              style: ApexTextStyles.kOrange16,
+              style: ApexTextStyles.kRed16,
             ),
           ),
         )
@@ -66,7 +66,7 @@ class DashBoard extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 3,
         ),
         FutureBuilder<String>(
-          future: DashBoardService().getDashBoardSecret(token: user.token),
+          future: DashBoardService().getDashBoardSecret(),
           // function where api call is made
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

@@ -62,6 +62,7 @@ class CountryResidenceScreen extends StatelessWidget {
                   flagSize: 30,
                   inputDecoration: InputDecoration(
                     hintStyle: ApexTextStyles.kAsh16,
+                    prefixIcon: Icon(Icons.search, color: ApexColors.darkGrey,),
                     hintText: 'Search',
                     filled: true,
                     fillColor: ApexColors.lightGrey,

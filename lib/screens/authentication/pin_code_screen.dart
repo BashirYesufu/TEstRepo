@@ -12,6 +12,7 @@ import '../../constants/text_styles.dart';
 import '../../models/user.dart';
 import '../../utilities/provider/providers/loading_provider.dart';
 import '../../utilities/provider/providers/user_provider.dart';
+import '../../utilities/shared_pref.dart';
 
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({Key? key}) : super(key: key);
@@ -67,6 +68,7 @@ class PinCodeScreen extends StatelessWidget {
         username: '',
       );
       userProvider.setUserToken(token: user.token);
+      Shared.setString(Shared.userToken, user.token);
       loader.stop();
       AlertHandler.showPopup(
         context: context,

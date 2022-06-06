@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:apex/models/user.dart';
+import 'package:apex/utilities/shared_pref.dart';
 import 'package:http/http.dart' as http;
 import '../../constants/string_literals.dart';
 
@@ -27,6 +28,8 @@ class AuthService {
       );
       var jsonResponse = jsonDecode(response.body.toString()) as Map<String, dynamic>;
       var result = jsonResponse['data']['user'];
+      Shared.setString(Shared.userToken, jsonResponse['data']['token']);
+      Shared.setString(Shared.userEmail, result['email']);
       return User(
         id: result['id'],
         fullName: result['full_name'],
@@ -57,6 +60,8 @@ class AuthService {
       var response = await http.post(url, body: body);
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       var result = jsonResponse['data']['user'];
+      Shared.setString(Shared.userToken, jsonResponse['data']['token']);
+      Shared.setString(Shared.userEmail, result['email']);
       return User(
         id: result['id'],
         fullName: result['full_name'],
