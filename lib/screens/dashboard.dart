@@ -9,19 +9,10 @@ import '../models/user.dart';
 import '../utilities/alert_handler.dart';
 import '../utilities/provider/providers/loading_provider.dart';
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({required this.user, Key? key}) : super(key: key);
+class DashBoard extends StatelessWidget {
+  DashBoard({required this.user, Key? key}) : super(key: key);
   static const screenID = "DashBoard";
   final User user;
-
-  @override
-  State<DashBoard> createState() => _DashBoardState();
-}
-
-class _DashBoardState extends State<DashBoard> {
-
-  User get user => widget.user;
-  String secret = 'secret';
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +24,26 @@ class _DashBoardState extends State<DashBoard> {
           offset: Offset(-20.0, 20.0),
           child: InkWell(
             onTap: () async {
-              try{
+              try {
                 loader.load();
                 bool logged = await AuthService().logOutUser(email: user.email);
                 loader.stop();
-                if (logged){
+                if (logged) {
                   AlertHandler.showPopup(
                     context: context,
                     alert: 'Signed out ${user.fullName}',
                     hasCloseButton: false,
-                    onPressed: () => Navigator.of(context).pushReplacementNamed(SignInScreen.screenID),
+                    onPressed: () => Navigator.of(context)
+                        .pushReplacementNamed(SignInScreen.screenID),
                   );
                 }
-              } catch(_){
+              } catch (_) {
                 loader.stop();
                 AlertHandler.showErrorPopup(
                     context: context,
-                    error: 'Error signing out user. Please check your connection and try again.');
+                    error:
+                        'Error signing out user. Please check your connection and try again.');
               }
-
             },
             child: Text(
               'Logout',
@@ -70,17 +62,40 @@ class _DashBoardState extends State<DashBoard> {
             ),
           ),
         ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 3,
+        ),
         FutureBuilder<String>(
-          future: DashBoardService().getDashBoardSecret(token: user.token), // function where api call is made
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {  // AsyncSnapshot<Your object type>
-            if( snapshot.connectionState == ConnectionState.waiting){
-              return loader.load();
-            }else{
-              if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
+          future: DashBoardService().getDashBoardSecret(token: user.token),
+          // function where api call is made
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: Text(
+                  'Loading...',
+                  style: ApexTextStyles.kOrangeBold28,
+                ),
+              );
+            } else {
+              if (snapshot.hasData) {
+                //loader.stop();
+                return Center(
+                  child: Text(
+                    '${snapshot.data}',
+                    style: ApexTextStyles.kBlack16,
+                    textAlign: TextAlign.center,
+                  ),
+                );
               } else {
-                return Center(child: Text('${snapshot.data}'));
-              }  // snapshot.data  :- get your object which is pass from your downloadData() function
+                //loader.stop();
+                return Center(
+                  child: Text(
+                    'Error getting dashboard secrets',
+                    style: ApexTextStyles.kBlack16,
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              } // snapshot.data  :- get your object which is pass from your downloadData() function
             }
           },
         ),
