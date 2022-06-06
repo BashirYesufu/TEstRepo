@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 class RouteHandler {
   static String initialRoute = OnBoardingScreen.screenID;
 
+  static String onBoardedRoute = SignInScreen.screenID;
+
   static Map<String, Widget Function(BuildContext)> routes = {
     OnBoardingScreen.screenID: (context) => OnBoardingScreen(),
     SignInScreen.screenID: (context) => SignInScreen(),

@@ -6,6 +6,7 @@ import 'package:apex/screens/onboarding/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../components/apex_scaffold.dart';
+import '../../utilities/shared_pref.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class OnBoardingScreen extends StatelessWidget {
       bottomNavBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: ApexButton(onPressed: (){
+          setOnboardedStatus();
           Navigator.pushReplacementNamed(context, SignInScreen.screenID);
         }, text: 'Get Started',),
       ),
@@ -27,6 +29,7 @@ class OnBoardingScreen extends StatelessWidget {
           offset: Offset(-20.0, 0.0),
           child: InkWell(
             onTap: (){
+              setOnboardedStatus();
               Navigator.pushReplacementNamed(context, SignInScreen.screenID);
             },
             child: Text('Skip', style: ApexTextStyles.kOrange16,),),
@@ -62,5 +65,9 @@ class OnBoardingScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void setOnboardedStatus() async {
+    await Shared.setBoolean(Shared.onboarded, true);
   }
 }
