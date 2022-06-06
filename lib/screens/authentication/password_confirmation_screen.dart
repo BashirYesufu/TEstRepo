@@ -2,7 +2,10 @@ import 'package:apex/components/apex_button.dart';
 import 'package:apex/components/apex_scaffold.dart';
 import 'package:apex/components/screen_title.dart';
 import 'package:apex/constants/apex_images.dart';
+import 'package:apex/screens/authentication/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../utilities/alert_handler.dart';
 
 class PasswordConfirmationScreen extends StatelessWidget {
   const PasswordConfirmationScreen({Key? key}) : super(key: key);
@@ -14,8 +17,13 @@ class PasswordConfirmationScreen extends StatelessWidget {
       hasBackButton: false,
       bottomNavBar: ApexButton(
         onPressed: () {
-          //TODO: Login with new password and go to dashboard
-          //Navigator.pushNamed(context, DashBoard.screenID, arguments: DashBoardArguments(user: user));
+          AlertHandler.showPopup(
+            context: context,
+            hasCloseButton: false,
+            alert:
+            'Please sign in with your new password to go to the dashboard',
+            onPressed: () => Navigator.pushNamed(context, SignInScreen.screenID),
+          );
         },
         text: 'Proceed to home',
       ),

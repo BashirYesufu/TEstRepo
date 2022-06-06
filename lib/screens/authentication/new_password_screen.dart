@@ -14,7 +14,6 @@ class NewPasswordScreen extends StatelessWidget {
     return ApexScaffold(
       bottomNavBar: ApexButton(
         onPressed: (){
-          //TODO: create new password
           Navigator.pushNamed(context, PasswordConfirmationScreen.screenID);
         },
         text: 'Create new password',

@@ -26,7 +26,7 @@ class OnBoardingScreen extends StatelessWidget {
       ),
       trailing: [
         Transform.translate(
-          offset: Offset(-20.0, 0.0),
+          offset: Offset(-20.0, 20.0),
           child: InkWell(
             onTap: (){
               setOnboardedStatus();
